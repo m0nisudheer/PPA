@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "../../lib/prisma";
 
-type DonorType = "individual" | "organisation";
-
 export async function GET() {
   try {
     const donors = await prisma.donor.findMany({
@@ -11,21 +9,16 @@ export async function GET() {
       },
     });
 
-    return NextResponse.json(
-      {
-        success: true,
-        message: "Donors fetched successfully.",
-        data: donors,
-      },
-      { status: 200 }
-    );
-  } catch (error) {
-    console.error(error);
-
+    return NextResponse.json({
+      success: true,
+      message: "Donors fetched successfully.",
+      data: donors,
+    });
+  } catch (error: any) {
     return NextResponse.json(
       {
         success: false,
-        message: "Failed to fetch donors.",
+        message: error.message || "Failed to fetch donors.",
       },
       { status: 500 }
     );
@@ -36,9 +29,10 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
-    const allowedTypes: DonorType[] = ["individual", "organisation"];
-
-    if (!allowedTypes.includes(body.donorType)) {
+    if (
+      body.donorType !== "individual" &&
+      body.donorType !== "organisation"
+    ) {
       return NextResponse.json(
         {
           success: false,
@@ -63,21 +57,16 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    return NextResponse.json(
-      {
-        success: true,
-        message: "Donor created successfully.",
-        data: donor,
-      },
-      { status: 201 }
-    );
-  } catch (error) {
-    console.error(error);
-
+    return NextResponse.json({
+      success: true,
+      message: "Donor created successfully.",
+      data: donor,
+    });
+  } catch (error: any) {
     return NextResponse.json(
       {
         success: false,
-        message: "Something went wrong while creating the donor.",
+        message: error.message || "Something went wrong.",
       },
       { status: 500 }
     );
