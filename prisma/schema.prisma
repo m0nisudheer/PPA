@@ -44,7 +44,7 @@ model Donation {
 
   donorId             String
   donor               Donor           @relation(fields: [donorId], references: [id], onDelete: Cascade)
-
+   donorType           DonorType
   amount              Int
   title               String
   description         String

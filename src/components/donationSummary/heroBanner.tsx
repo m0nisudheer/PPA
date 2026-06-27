@@ -7,7 +7,11 @@ export default function HeroBanner() {
   return (
     <section
       className="hero relative h-[360px] lg:h-[480px] bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: "url('/images/banner2.png')" }}
+      // style={{ backgroundImage: "url('/images/banner2.png')" }}
+      style={{
+        backgroundImage:
+          "url('https://res.cloudinary.com/dg8zhu8fq/image/upload/f_auto,q_auto:good,w_1920,c_limit/v1782554097/tgzlxja8ir4irmrebxgq.png')",
+      }}
     >
       <div className="relative z-10 container mx-auto flex h-full items-center">
         <div className="grid w-full lg:grid-cols-2 gap-8 md:gap-0">

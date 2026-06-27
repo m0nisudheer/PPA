@@ -25,9 +25,10 @@ type Props = {
   onSubmitData: (data: FormValues & {
     donorType: "individual" | "organisation";
   }) => void;
+   loading?: boolean;
 };
 
-export default function YourDetailsForm({ onSubmitData }: Props) {
+export default function YourDetailsForm({ onSubmitData,  loading = false }: Props) {
 
   const [donorType, setDonorType] = useState<"individual" | "organisation">(
     "individual",
@@ -72,7 +73,7 @@ const inputClass = (hasError?: boolean) =>
               key={type}
               type="button"
               onClick={() => setDonorType(type)}
-              className={`py-2.5 text-sm font-medium transition-colors first:border-r first:border-gray-200 ${
+              className={`cursor-pointer py-2.5 text-sm font-medium transition-colors first:border-r first:border-gray-200 ${
                 donorType === type
                   ? "bg-[#3a7d1e] text-white"
                   : "bg-white text-[#4B5563] hover:bg-gray-50"
@@ -293,12 +294,26 @@ const inputClass = (hasError?: boolean) =>
           </div>
 
           <div>
-            <button
-              type="submit"
-              className="cursor-pointer flex w-full items-center justify-center gap-2 rounded-md bg-[#3a7d1e] py-3.5 text-sm font-medium uppercase tracking-wide text-white"
-            >
-              Proceed to Payment <ArrowRight size={15} />
-            </button>
+       <button
+  type="submit"
+  disabled={loading}
+  className={`flex w-full items-center justify-center gap-2 rounded-md py-3.5 text-sm font-medium uppercase tracking-wide text-white transition ${
+    loading
+      ? "cursor-not-allowed bg-gray-400"
+      : "cursor-pointer bg-[#3a7d1e] hover:bg-[#2f6718]"
+  }`}
+>
+  {loading ? (
+    <>
+      <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+      Preparing Payment...
+    </>
+  ) : (
+    <>
+      Proceed to Payment <ArrowRight size={15} />
+    </>
+  )}
+</button>
             <div className="mt-3 flex items-center justify-center gap-1.5 text-xs text-[#909194]">
               <Shield size={12} />
               <span>

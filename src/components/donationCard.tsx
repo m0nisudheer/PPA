@@ -229,10 +229,25 @@ const donations = [
 
 export default function DonationCard() {
   const [selected, setSelected] = useState(0);
-  const [customAmount, setCustomAmount] = useState("");
+const [customAmount, setCustomAmount] = useState("500");
   const router = useRouter();
   const { setDonation } = useDonationStore();
   const [error, setError] = useState("");
+  
+
+ const handleSelectDonation = (index: number) => {
+  setSelected(index);
+
+  const donation = donations[index];
+
+  if (donation.title === "Other Amount") {
+    setCustomAmount("");
+  } else {
+    setCustomAmount(donation.amount.replace(/[^\d]/g, ""));
+  }
+
+  if (error) setError("");
+};
 
   const handleDonate = () => {
     const donation = donations[selected];
@@ -286,7 +301,7 @@ export default function DonationCard() {
             return (
               <button
                 key={index}
-                onClick={() => setSelected(index)}
+                onClick={() => handleSelectDonation(index)}
                 className={`relative rounded-xl border p-6 transition ${
                   active
                     ? "border-2 border-[#70AA44] bg-lime-50"
@@ -315,7 +330,7 @@ export default function DonationCard() {
           return (
             <button
               key={index}
-              onClick={() => setSelected(index)}
+              onClick={() => handleSelectDonation(index)}
               className={`relative flex flex-col gap-3 rounded-xl border p-6 text-center cursor-pointer ${
                 active
                   ? "border-2 border-[#70AA44] bg-lime-50"

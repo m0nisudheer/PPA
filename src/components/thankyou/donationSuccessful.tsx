@@ -2,6 +2,7 @@
 
 import { Download, Mail, Share2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 interface OrgInfo {
   name: string;
@@ -183,6 +184,7 @@ async function downloadReceiptPDF(data: ReceiptData): Promise<void> {
     unit: "pt",
     format: [595.28, 646],
     orientation: "portrait",
+    compress: true,
   });
   const logo = new Image();
   logo.crossOrigin = "anonymous";
@@ -888,10 +890,16 @@ export default function DonationSuccessful({ data }: DonationSuccessfulProps) {
   const { donation } = data;
   const total = donation.amount + donation.platformFee;
   const router = useRouter();
+  const [downloading, setDownloading] = useState(false);
 
-  const handleDownload = async (): Promise<void> => {
+ const handleDownload = async (): Promise<void> => {
+  try {
+    setDownloading(true);
     await downloadReceiptPDF(data);
-  };
+  } finally {
+    setDownloading(false);
+  }
+};
 
   return (
     <div className="flex flex-col items-center gap-6 px-4 py-8 border border-gray-200 rounded-2xl mx-auto">
@@ -983,26 +991,36 @@ export default function DonationSuccessful({ data }: DonationSuccessfulProps) {
           ))}
         </div>
 
-        <button
-          onClick={handleDownload}
-          className="mt-2 cursor-pointer flex w-full items-center justify-center gap-2 rounded-xl bg-[#3a7d1e] py-4 text-sm font-bold uppercase tracking-widest text-white hover:bg-[#2f6618] transition-colors"
-        >
-          <Download size={18} />
-          Download Receipt
-        </button>
+<button
+  onClick={handleDownload}
+  disabled={downloading}
+  className="mt-2 cursor-pointer flex w-full items-center justify-center gap-2 rounded-xl bg-[#3a7d1e] py-4 text-sm font-bold uppercase tracking-widest text-white hover:bg-[#2f6618] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+>
+  {downloading ? (
+    <>
+      <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+      Downloading...
+    </>
+  ) : (
+    <>
+      <Download size={18} />
+      Download Receipt
+    </>
+  )}
+</button>
 
         <div className="grid grid-cols-2 gap-3">
           <button className="flex items-center justify-center gap-2 rounded-xl border border-[#E5E7EB] bg-white py-3.5 text-sm font-semibold uppercase tracking-wider text-[#374151] hover:bg-gray-50 transition-colors">
             <Mail size={16} />
             View Receipt on Email
           </button>
-        <button
-  onClick={() => router.push("/shareyour-support")}
-  className="cursor-pointer flex items-center justify-center gap-2 rounded-xl border border-[#E5E7EB] bg-white py-3.5 text-sm font-semibold tracking-wider text-[#374151] hover:bg-gray-50 transition-colors"
->
-  <Share2 size={16} />
-  Share Your Support
-</button>
+          <button
+            onClick={() => router.push("/shareyour-support")}
+            className="cursor-pointer flex items-center justify-center gap-2 rounded-xl border border-[#E5E7EB] bg-white py-3.5 text-sm font-semibold tracking-wider text-[#374151] hover:bg-gray-50 transition-colors"
+          >
+            <Share2 size={16} />
+            Share Your Support
+          </button>
         </div>
       </div>
     </div>

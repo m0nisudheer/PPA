@@ -9,13 +9,14 @@ export async function GET() {
         fullName: true,
         email: true,
         mobile: true,
-        donorType: true,
+        // donorType: true,
         donations: {
           orderBy: {
             createdAt: "desc",
           },
           select: {
             id: true,
+             donorType: true,
             amount: true,
             title: true,
             description: true,
