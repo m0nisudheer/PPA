@@ -11,24 +11,31 @@ export async function GET() {
         mobile: true,
         donorType: true,
         donations: {
+          orderBy: {
+            createdAt: "desc",
+          },
           select: {
+            id: true,
             amount: true,
+            title: true,
+            description: true,
+            paymentStatus: true,
+            razorpayOrderId: true,
+            razorpayPaymentId: true,
+            createdAt: true,
           },
         },
       },
     });
 
-    const data = donors.map((donor) => {
-      const totalDonations = donor.donations.length;
-
-      const totalAmount = donor.donations.reduce((sum, d) => sum + d.amount, 0);
-
-      return {
-        ...donor,
-        totalDonations,
-        totalAmount,
-      };
-    });
+    const data = donors.map((donor) => ({
+      ...donor,
+      totalDonations: donor.donations.length,
+      totalAmount: donor.donations.reduce(
+        (sum, d) => sum + d.amount,
+        0
+      ),
+    }));
 
     return NextResponse.json({
       success: true,
@@ -40,7 +47,7 @@ export async function GET() {
         success: false,
         message: error.message,
       },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
