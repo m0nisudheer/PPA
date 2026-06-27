@@ -50,7 +50,7 @@ export const impactData = [
     title: "Education & Values",
     description: "Education support and value-based development.",
     icon: "/images/donationImpact/education.png",
-    image: "/images/donationImpact/educationImage.png",
+    image: "/images/donationImpact/education.png",
   },
   {
     id: 5,
