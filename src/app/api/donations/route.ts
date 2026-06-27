@@ -51,20 +51,20 @@ export async function GET() {
       },
     });
 
-    const data = donors.map((donor: DonorWithDonations) => {
-      const totalDonations = donor.donations.length;
+   const data = donors.map((donor) => {
+  const totalDonations = donor.donations.length;
 
-      const totalAmount = donor.donations.reduce(
-        (sum, d) => sum + d.amount,
-        0
-      );
+  const totalAmount = donor.donations.reduce(
+    (sum, d) => sum + d.amount,
+    0
+  );
 
-      return {
-        ...donor,
-        totalDonations,
-        totalAmount,
-      };
-    });
+  return {
+    ...donor,
+    totalDonations,
+    totalAmount,
+  };
+});
 
     return NextResponse.json({
       success: true,
