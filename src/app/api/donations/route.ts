@@ -28,14 +28,20 @@ export async function GET() {
       },
     });
 
-    const data = donors.map((donor) => ({
-      ...donor,
-      totalDonations: donor.donations.length,
-      totalAmount: donor.donations.reduce(
+    const data = donors.map((donor) => {
+      const totalDonations = donor.donations.length;
+
+      const totalAmount = donor.donations.reduce(
         (sum, d) => sum + d.amount,
         0
-      ),
-    }));
+      );
+
+      return {
+        ...donor,
+        totalDonations,
+        totalAmount,
+      };
+    });
 
     return NextResponse.json({
       success: true,
