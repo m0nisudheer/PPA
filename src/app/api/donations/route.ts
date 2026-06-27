@@ -18,20 +18,17 @@ export async function GET() {
       },
     });
 
-   const data = donors.map((donor: (typeof donors)[number]) => {
-  const totalDonations = donor.donations.length;
+    const data = donors.map((donor) => {
+      const totalDonations = donor.donations.length;
 
-  const totalAmount = donor.donations.reduce(
-    (sum: number, d: { amount: number }) => sum + d.amount,
-    0
-  );
+      const totalAmount = donor.donations.reduce((sum, d) => sum + d.amount, 0);
 
-  return {
-    ...donor,
-    totalDonations,
-    totalAmount,
-  };
-});
+      return {
+        ...donor,
+        totalDonations,
+        totalAmount,
+      };
+    });
 
     return NextResponse.json({
       success: true,
@@ -43,7 +40,7 @@ export async function GET() {
         success: false,
         message: error.message,
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
