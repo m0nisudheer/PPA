@@ -1,6 +1,26 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/src/app/lib/prisma";
 
+type Donation = {
+  id: string;
+  amount: number;
+  title: string;
+  description: string;
+  paymentStatus: string;
+  razorpayOrderId: string;
+  razorpayPaymentId: string | null;
+  createdAt: Date;
+};
+
+type DonorWithDonations = {
+  id: string;
+  fullName: string;
+  email: string;
+  mobile: string;
+  donorType: string;
+  donations: Donation[];
+};
+
 export async function GET() {
   try {
     const donors = await prisma.donor.findMany({
@@ -28,7 +48,7 @@ export async function GET() {
       },
     });
 
-    const data = donors.map((donor) => {
+    const data = donors.map((donor: DonorWithDonations) => {
       const totalDonations = donor.donations.length;
 
       const totalAmount = donor.donations.reduce(
