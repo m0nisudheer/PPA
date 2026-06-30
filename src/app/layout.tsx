@@ -12,7 +12,7 @@ import Footer from "../components/footer";
 const robotoCondensed = Roboto_Condensed({
   variable: "--font-roboto-condensed",
   subsets: ["latin"],
-  // weight: ["200", "300", "500", "600"],
+  weight: ["100", "200", "300", "400"],
 });
 
 const montserrat = Montserrat({

@@ -25,7 +25,7 @@ type DonationSummaryProps = {
   donation: DonationData;
 };
 
-export function                                                                 DonationSummary({
+export function DonationSummary({
   donation,
 }: DonationSummaryProps) {
   const donationAmount = Number(donation.amount);
@@ -142,7 +142,7 @@ export function                                                                 
             <p className="font-bold text-[#111827] text-[15px]">
                {donation.title}
             </p>
-            <p className="text-[12px] text-[#6B7280] leading-[100%] tracking-normal">
+            <p className="text-[14px] text-[#6B7280] leading-[120%] tracking-normal">
                {donation.description}
             </p>
           </div>
@@ -171,7 +171,7 @@ export function                                                                 
           </div>
         </div>
 
-        <div className="flex items-start gap-3 rounded-xl border border-[#DCFCE7] bg-[#F0FDF4] p-3">
+        {/* <div className="flex items-start gap-3 rounded-xl border border-[#DCFCE7] bg-[#F0FDF4] p-3">
           <div>
             <p className="font-semibold text-[#1A7A3C] text-[16px] leading-normal">
               80G Tax Exemption
@@ -190,7 +190,7 @@ export function                                                                 
               className="object-contain"
             />
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

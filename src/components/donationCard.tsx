@@ -229,25 +229,24 @@ const donations = [
 
 export default function DonationCard() {
   const [selected, setSelected] = useState(0);
-const [customAmount, setCustomAmount] = useState("500");
+  const [customAmount, setCustomAmount] = useState("500");
   const router = useRouter();
   const { setDonation } = useDonationStore();
   const [error, setError] = useState("");
-  
 
- const handleSelectDonation = (index: number) => {
-  setSelected(index);
+  const handleSelectDonation = (index: number) => {
+    setSelected(index);
 
-  const donation = donations[index];
+    const donation = donations[index];
 
-  if (donation.title === "Other Amount") {
-    setCustomAmount("");
-  } else {
-    setCustomAmount(donation.amount.replace(/[^\d]/g, ""));
-  }
+    if (donation.title === "Other Amount") {
+      setCustomAmount("");
+    } else {
+      setCustomAmount(donation.amount.replace(/[^\d]/g, ""));
+    }
 
-  if (error) setError("");
-};
+    if (error) setError("");
+  };
 
   const handleDonate = () => {
     const donation = donations[selected];
@@ -268,7 +267,7 @@ const [customAmount, setCustomAmount] = useState("500");
         : donation.desc,
     });
 
-    router.push("/donate");
+    router.push("/details");
   };
 
   return (
@@ -285,9 +284,16 @@ const [customAmount, setCustomAmount] = useState("500");
           <div className="h-1 w-20 rounded bg-[#6F962C]" />
         </div>
 
-        <p className="font-normal text-[18px] text-[#161616]">
-          Every contribution, big or small, creates a lasting impact.
-        </p>
+        <div className="flex flex-wrap items-center gap-2 text-[18px] text-[#161616]">
+          <p className="font-normal">
+            Every contribution, big or small, creates a lasting impact.
+          </p>
+
+          <span className="rounded-sm border border-red-200 bg-red-50 px-2 text-[16px] text-red-700">
+            80G tax exemption is under process. Tax exemption receipts are
+            currently not available.
+          </span>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 ">
@@ -366,7 +372,7 @@ const [customAmount, setCustomAmount] = useState("500");
       </div>
 
       {/* <div className="my-8 border-t border-gray-200" /> */}
-      <div className="my-2 md:my-4 grid grid-cols-1 gap-6 border-t border-gray-200 pt-8 xl:grid-cols-6">
+      <div className="my-2 md:my-4 grid grid-cols-1 gap-6 border-t border-gray-200 pt-8 lg:grid-cols-4 xl:grid-cols-6">
         <div className="lg:col-span-2 flex flex-col gap-1">
           <label className="block text-[16px] font-bold font-inter leading-6 tracking-normal">
             Enter Custom Amount
@@ -400,7 +406,7 @@ const [customAmount, setCustomAmount] = useState("500");
           </button>
         </div>
 
-        <div className="flex flex-wrap items-end md:justify-end gap-3 lg:col-span-2">
+        <div className="flex flex-wrap items-end md:justify-end gap-3 lg:col-span-4 xl:col-span-2">
           <img src="/images/payments/Upi.png" alt="UPI" className="h-8" />
           <img src="/images/payments/Visa.png" alt="Visa" className="h-8" />
           <img

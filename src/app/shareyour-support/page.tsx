@@ -1,3 +1,4 @@
+"use client"
 import CTA from "@/src/components/shareUrSupport/cta";
 import Banner from "@/src/components/shareUrSupport/heroBanner";
 import SupportCard from "@/src/components/shareUrSupport/supportCard";

@@ -99,7 +99,7 @@ const Page = () => {
         <section className="relative">
           <HeroBanner />
           <div className="section grid grid-cols-3 gap-4">
-            <div className="col-span-3 xl:col-span-2 space-y-4">
+            {/* <div className="col-span-3 xl:col-span-2 space-y-4">
               {receipt ? (
                 <DonationSuccessful data={receipt} />
               ) : (
@@ -107,15 +107,50 @@ const Page = () => {
                   Loading receipt...
                 </div>
               )}
-              <MadeDifference />
-            </div>
+            </div> */}
+            <div className="col-span-3 xl:col-span-2">
+  {receipt ? (
+    <DonationSuccessful data={receipt} />
+  ) : (
+    <div className="animate-pulse space-y-6">
+      {/* Success Header */}
+      <div className="flex flex-col items-center rounded-2xl bg-white py-6">
+        <div className="h-24 w-24 rounded-full bg-gray-200" />
+        <div className="mt-6 h-10 w-72 rounded bg-gray-200" />
+        <div className="mt-4 h-5 w-[420px] max-w-full rounded bg-gray-200" />
+      </div>
 
+      {/* Transaction Details */}
+      <div className="rounded-2xl border border-[#E5E7EB] bg-[#F9FAFB] p-5">
+        <div className="h-7 w-56 rounded bg-gray-200" />
+
+        {[1, 2, 3, 4].map((item) => (
+          <div
+            key={item}
+            className="flex items-center justify-between border-b border-[#E5E7EB] py-4 last:border-0"
+          >
+            <div className="h-4 w-36 rounded bg-gray-200" />
+            <div className="h-4 w-48 rounded bg-gray-200" />
+          </div>
+        ))}
+
+        <div className="h-14 w-full rounded-xl bg-gray-200" />
+
+        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div className="h-14 rounded-xl border border-[#E5E7EB] bg-gray-200" />
+          <div className="h-14 rounded-xl border border-[#E5E7EB] bg-gray-200" />
+        </div>
+      </div>
+    </div>
+  )}
+</div>
 
             <div className="col-span-3 xl:col-span-1 space-y-4">
               <DonationSummary donation={donation} />
               <WhatHappensNext />
             </div>
           </div>
+          <MadeDifference />
           <WouldYouLike />
         </section>
       </main>

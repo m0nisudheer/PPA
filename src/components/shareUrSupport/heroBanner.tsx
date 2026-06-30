@@ -33,7 +33,10 @@ export default function Banner() {
   return (
     <div
       className="relative h-[calc(100vh-64px)] bg-cover bg-center bg-no-repeat hero"
-      style={{ backgroundImage: "url('/images/heroBanner.png')" }}
+     style={{
+        backgroundImage:
+          "url('https://res.cloudinary.com/dg8zhu8fq/image/upload/f_auto,q_auto:good,w_1920,c_limit/v1782553682/e5lrpvyfida31is6vgyr.png')",
+      }}
     >
       <div className="relative z-10 mx-auto flex h-[calc(100%-3rem)] xl:h-[calc(100%-4rem)] items-center">
         <div className="grid w-full items-center gap-8 lg:gap-12 lg:grid-cols-3">

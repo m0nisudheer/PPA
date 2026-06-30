@@ -14,6 +14,7 @@ import {
   HeartHandshake,
   Trophy,
 } from "lucide-react";
+import { useDonationStore } from "@/src/store/donationStore";
 
 type Tab = "social" | "whatsapp" | "email" | "copylink";
 
@@ -165,9 +166,14 @@ export default function SupportCard() {
   const [activeTab, setActiveTab] = useState<Tab>("social");
   const [message, setMessage] = useState("");
   const MAX = 200;
+    const amount = useDonationStore((state) => state.amount);
+    const title = useDonationStore((state) => state.title);
+    const description = useDonationStore((state) => state.description);
+    const platformFee = 50;
+  const total = Number(amount) + platformFee;
 
   return (
-    <div className="flex flex-col gap-6 rounded-2xl px-5 py-7 md:px-6 md:py-8 shadow-xl bg-white mx-auto">
+    <div className="flex flex-col gap-6 rounded-2xl px-5 py-7 md:px-6 md:py-8 shadow-sm bg-white mx-auto">
       <div className="flex flex-col items-center gap-2 md:gap-1 text-center">
         <h2 className="text-[20px] md:text-[28px] font-bold text-[#111827] leading-[100%] tracking-normal">
           Share Your Support
@@ -238,7 +244,7 @@ export default function SupportCard() {
                   </div>
                   <div className="flex-1 flex gap-3">
                     <div className="flex flex-col md:flex-row gap-6">
-                      <p className="text-[15px] md:text-[18px] text-[#0A2540] font-medium flex flex-col gap-2 px-5">
+                      <div className="text-[15px] md:text-[18px] text-[#0A2540] font-medium flex flex-col gap-2 px-5">
                         <div>
                           I just supported rural talent through Palle Palleku
                           Aata.
@@ -247,7 +253,7 @@ export default function SupportCard() {
                           Join me in empowering young athletes and building a
                           brighter future!
                         </div>
-                      </p>
+                      </div>
                       <img
                         src="/images/UrSupport.png"
                         alt="preview"
@@ -328,38 +334,44 @@ export default function SupportCard() {
                   </div>
                   <div className="flex flex-col gap-1">
                     <p className="text-[20px] md:text-[26px] font-bold text-[#0A2540] leading-[100%] tracking-normal">
-                      ₹2,000
+                      {amount}
                     </p>
                     <p className="text-[15px] md:text-[16px] font-bold text-[#0A2540] ">
-                      Support Their Journey
+                      {title}
                     </p>
                     <p className="text-[14px] text-[#6B7280] leading-[130%] md:leading-[100%] tracking-normal">
-                      Help cover sports kit, nutrition and travel for
-                      competitions.
+                      {description}
                     </p>
                   </div>
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  {[
-                    { label: "Donation Amount", value: "₹2,000" },
-                    { label: "Platform Fee", value: "₹50" },
-                  ].map(({ label, value }) => (
-                    <div
-                      key={label}
-                      className="flex justify-between text-[15px] md:text-[16px] text-[#4B5563]"
-                    >
-                      <span>{label}</span>
-                      <span>{value}</span>
-                    </div>
-                  ))}
-                  <div className="flex justify-between md:text-[16px] font-bold text-[#0A2540] py-2 border-t border-[#E5E7EB]">
-                    <span>Total Amount</span>
-                    <span className="text-[#16A34A] text-[18px] md:text-[20px] font-bold leading-none tracking-normal">
-                      ₹2,050
-                    </span>
-                  </div>
-                </div>
+  {[
+    {
+      label: "Donation Amount",
+      value: `₹${Number(amount).toLocaleString("en-IN")}`,
+    },
+    {
+      label: "Platform Fee",
+      value: `₹${platformFee.toLocaleString("en-IN")}`,
+    },
+  ].map(({ label, value }) => (
+    <div
+      key={label}
+      className="flex justify-between text-[15px] md:text-[16px] text-[#4B5563]"
+    >
+      <span>{label}</span>
+      <span>{value}</span>
+    </div>
+  ))}
+
+  <div className="flex justify-between border-t border-[#E5E7EB] py-2 text-[16px] font-bold text-[#0A2540]">
+    <span>Total Amount</span>
+    <span className="text-[18px] font-bold leading-none tracking-normal text-[#16A34A] md:text-[20px]">
+      ₹{total.toLocaleString("en-IN")}
+    </span>
+  </div>
+</div>
               </div>
 
               <div className="rounded-xl border border-[#E5E7EB] p-4 flex flex-col gap-5">

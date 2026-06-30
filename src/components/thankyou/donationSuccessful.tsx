@@ -176,7 +176,7 @@ function TxCell({
   );
 }
 
-async function downloadReceiptPDF(data: ReceiptData): Promise<void> {
+async function createReceiptPDF(data: ReceiptData): Promise<any> {
   const { jsPDF } = await import("jspdf");
 
   // const doc = new jsPDF({ unit: "pt", format: "a4", orientation: "portrait" });
@@ -883,7 +883,8 @@ async function downloadReceiptPDF(data: ReceiptData): Promise<void> {
 
   y += stripH;
 
-  doc.save(`PPA-Receipt-${data.receiptNo.replace(/\//g, "-")}.pdf`);
+  // doc.save(`PPA-Receipt-${data.receiptNo.replace(/\//g, "-")}.pdf`);
+  return doc;
 }
 
 export default function DonationSuccessful({ data }: DonationSuccessfulProps) {
@@ -892,14 +893,25 @@ export default function DonationSuccessful({ data }: DonationSuccessfulProps) {
   const router = useRouter();
   const [downloading, setDownloading] = useState(false);
 
- const handleDownload = async (): Promise<void> => {
-  try {
+  const handleDownload = async () => {
     setDownloading(true);
-    await downloadReceiptPDF(data);
-  } finally {
-    setDownloading(false);
-  }
-};
+
+    try {
+      const doc = await createReceiptPDF(data);
+      doc.save(`PPA-Receipt-${data.receiptNo.replace(/\//g, "-")}.pdf`);
+    } finally {
+      setDownloading(false);
+    }
+  };
+
+  const handleViewReceipt = async () => {
+    const doc = await createReceiptPDF(data);
+
+    const blob = doc.output("blob");
+    const url = URL.createObjectURL(blob);
+
+    window.open(url, "_blank");
+  };
 
   return (
     <div className="flex flex-col items-center gap-6 px-4 py-8 border border-gray-200 rounded-2xl mx-auto">
@@ -936,32 +948,31 @@ export default function DonationSuccessful({ data }: DonationSuccessfulProps) {
         <h2 className="text-[26px] md:text-[30px] font-bold text-[#111827] leading-tight">
           Donation Successful!
         </h2>
-        <p className="text-[15px] md:text-[17px] text-[#6B7280]">
+        <p className="text-[15px] md:text-[18px] text-[#6B7280]">
           Thank you for believing in rural talent and supporting our mission.
         </p>
       </div>
 
-      <div className="flex items-center gap-2 bg-[#F9FAFB] rounded-full px-5 py-2.5 text-sm text-[#6B7280]">
+      {/* <div className="flex items-center gap-2 bg-[#F9FAFB] rounded-full px-5 py-2.5 text-sm text-[#6B7280]">
         <Mail size={15} className="text-[#6B7280]" />
         <span>We have sent the donation receipt to your email.</span>
         <Mail size={15} className="text-[#6B7280]" />
-      </div>
+      </div> */}
 
-      <div className="w-full rounded-2xl border border-[#E5E7EB] bg-[#F9FAFB] p-5 flex flex-col gap-4">
+      <div className="flex flex-col gap-3 w-full rounded-2xl border border-[#E5E7EB] bg-[#F9FAFB] p-3">
         <h3 className="text-[17px] font-bold text-[#111827]">
           Transaction Details
         </h3>
-        <div className="flex flex-col gap-3">
+
+        <div className="divide-y divide-[#E5E7EB]">
           {[
             {
               label: "Transaction ID",
               value: data.transaction.transactionId,
-              bold: false,
             },
             {
               label: "Payment Mode",
               value: data.transaction.paymentMode,
-              bold: false,
             },
             {
               label: "Transaction Date",
@@ -974,52 +985,59 @@ export default function DonationSuccessful({ data }: DonationSuccessfulProps) {
               isStatus: true,
             },
           ].map(({ label, value, bold, isStatus }) => (
-            <div key={label} className="flex items-center justify-between">
+            <div key={label} className="flex items-center justify-between py-3">
               <span className="text-[14px] text-[#6B7280]">{label}</span>
-              <span
-                className={`text-[14px] ${
-                  isStatus
-                    ? "text-[#3a7d1e] font-semibold"
-                    : bold
-                      ? "font-semibold text-[#111827]"
-                      : "text-[#111827]"
-                }`}
-              >
-                {value}
-              </span>
+
+              {isStatus ? (
+                <span className="rounded-full bg-[#E9F7E5] px-3 py-1 text-[13px] font-semibold text-[#3A7D1E]">
+                  {value}
+                </span>
+              ) : (
+                <span
+                  className={`text-[14px] ${
+                    bold ? "font-semibold text-[#111827]" : "text-[#111827]"
+                  }`}
+                >
+                  {value}
+                </span>
+              )}
             </div>
           ))}
         </div>
 
-<button
-  onClick={handleDownload}
-  disabled={downloading}
-  className="mt-2 cursor-pointer flex w-full items-center justify-center gap-2 rounded-xl bg-[#3a7d1e] py-4 text-sm font-bold uppercase tracking-widest text-white hover:bg-[#2f6618] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
->
-  {downloading ? (
-    <>
-      <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
-      Downloading...
-    </>
-  ) : (
-    <>
-      <Download size={18} />
-      Download Receipt
-    </>
-  )}
-</button>
+        <button
+          onClick={handleDownload}
+          disabled={downloading}
+          className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#3A7D1E] py-4 text-sm font-bold uppercase tracking-widest text-white transition-colors hover:bg-[#2F6618] disabled:cursor-not-allowed disabled:opacity-60"
+        >
+          {downloading ? (
+            <>
+              <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+              Downloading...
+            </>
+          ) : (
+            <>
+              <Download size={18} />
+              Download Receipt
+            </>
+          )}
+        </button>
 
         <div className="grid grid-cols-2 gap-3">
-          <button className="flex items-center justify-center gap-2 rounded-xl border border-[#E5E7EB] bg-white py-3.5 text-sm font-semibold uppercase tracking-wider text-[#374151] hover:bg-gray-50 transition-colors">
+          <button
+            onClick={handleViewReceipt}
+            className="cursor-pointer flex items-center justify-center gap-2 rounded-xl border border-[#E5E7EB] bg-white py-3.5 text-sm font-semibold text-[#374151] transition-colors hover:bg-gray-50"
+          >
             <Mail size={16} />
-            View Receipt on Email
+            View Receipt
           </button>
+
           <button
             onClick={() => router.push("/shareyour-support")}
-            className="cursor-pointer flex items-center justify-center gap-2 rounded-xl border border-[#E5E7EB] bg-white py-3.5 text-sm font-semibold tracking-wider text-[#374151] hover:bg-gray-50 transition-colors"
+            className="flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-[#E5E7EB] bg-white py-3.5 text-sm font-semibold text-[#374151] transition-colors hover:bg-gray-50"
           >
             <Share2 size={16} />
-            Share Your Support
+            Share Support
           </button>
         </div>
       </div>

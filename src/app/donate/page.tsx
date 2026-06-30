@@ -1,192 +1,171 @@
-"use client";
+import DonationCard from "../../components/donationCard";
+import ImpactCard from "../../components/donationImpact";
+import Banner from "../../components/heroBanner";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import axios from "axios";
+import { CalendarDays, UserRound, Building2, Gift } from "lucide-react";
+import OtherWays from "../../components/otherWays";
+import TaxBanner from "../../components/taxBanner";
+import TrustCard from "../../components/trustCard";
+import BeTheReason from "@/src/components/beTheReason";
 
-import YourDetailsForm, {
-  DonorFormData,
-} from "@/src/components/donationSummary/detailsForm";
-import HeroBanner from "@/src/components/donationSummary/heroBanner";
-import {
-  DonationHelp,
-  DonationSummary,
-  TrustStats,
-} from "@/src/components/donationSummary/summary";
-import { useDonationStore } from "@/src/store/donationStore";
+export const impactData = [
+  {
+    id: 1,
+    title: "Access to Sports",
+    description: "Provides equipment and infrastructure in rural areas.",
+    icon: "/images/donationImpact/access.png",
+    image: "/images/donationImpact/accessImage.png",
+  },
+  {
+    id: 2,
+    title: "Quality Coaching",
+    description: "Professional training to nurture talent.",
+    icon: "/images/donationImpact/coach.png",
+    image: "/images/donationImpact/coachImage.png",
+  },
+  {
+    id: 3,
+    title: "Nutrition & Health",
+    description: "Proper nutrition and healthcare for young athletes.",
+    icon: "/images/donationImpact/nutrition.png",
+    image: "/images/donationImpact/nutritionImage.png",
+  },
+  {
+    id: 4,
+    title: "Education & Values",
+    description: "Education support and value-based development.",
+    icon: "/images/donationImpact/education.png",
+    image: "/images/donationImpact/education.png",
+  },
+  {
+    id: 5,
+    title: "Opportunities",
+    description: "Exposure to tournaments and scholarships.",
+    icon: "/images/donationImpact/opportunities.png",
+    image: "/images/donationImpact/opportunitiesImage.png",
+  },
+];
+
+export const giveData = [
+  {
+    id: 1,
+    title: "Monthly Giving",
+    description:
+      "Become a monthly donor and create a sustained impact every month.",
+    button: "DONATE MONTHLY",
+    icon: CalendarDays,
+  },
+  {
+    id: 2,
+    title: "Sponsor a Child",
+    description:
+      "Support a child's training, education and overall development.",
+    button: "SPONSOR NOW",
+    icon: UserRound,
+  },
+  {
+    id: 3,
+    title: "Corporate Partnership",
+    description:
+      "Partner with us to empower rural talent and build stronger communities.",
+    button: "PARTNER WITH US",
+    icon: Building2,
+  },
+  {
+    id: 4,
+    title: "In-Kind Donations",
+    description:
+      "Contribute sports equipment, gear, nutrition or other essentials.",
+    button: "KNOW MORE",
+    icon: Gift,
+  },
+];
+
+export const trustData = [
+  {
+    id: 1,
+    title: "100% Secure Donations",
+    description: "Your transaction is safe with us.",
+    icon: "/images/trust/lock.png",
+  },
+  {
+    id: 2,
+    title: "Transparent Operations",
+    description: "We ensure accountability and transparency.",
+    icon: "/images/trust/transparent.png",
+  },
+  {
+    id: 3,
+    title: "Verified Organization",
+    description:
+      "Registered non-profit organization working for rural sports development.",
+    icon: "/images/trust/Verified.png",
+  },
+  {
+    id: 4,
+    title: "Impact Driven",
+    description: "Your contribution creates measurable change.",
+    icon: "/images/trust/focus.png",
+  },
+];
 
 const Page = () => {
-  const router = useRouter();
-
-  const amount = useDonationStore((state) => state.amount);
-  const title = useDonationStore((state) => state.title);
-  const description = useDonationStore((state) => state.description);
-
-  const [loadingPayment, setLoadingPayment] = useState(false);
-  const [processing, setProcessing] = useState(false);
-
-  const loadRazorpay = () => {
-    return new Promise<boolean>((resolve) => {
-      if ((window as any).Razorpay) {
-        resolve(true);
-        return;
-      }
-
-      const script = document.createElement("script");
-      script.src = "https://checkout.razorpay.com/v1/checkout.js";
-
-      script.onload = () => resolve(true);
-      script.onerror = () => resolve(false);
-
-      document.body.appendChild(script);
-    });
-  };
-
-  const verifyPayment = async (response: any, donationId: string) => {
-    try {
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/payment/verify`,
-        {
-          ...response,
-          donationId,
-        },
-      );
-
-      router.replace(`/thank-you/${donationId}`);
-    } catch (error) {
-      setProcessing(false);
-      alert("Payment verification failed.");
-    }
-  };
-
-  const handleFormSubmit = async (data: DonorFormData) => {
-    setLoadingPayment(true);
-
-    try {
-      const payload = {
-        ...data,
-        amount: Number(amount),
-        platformFee: 50,
-        title,
-        description,
-      };
-
-      const { data: orderResponse } = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/payment/create-order`,
-        payload,
-      );
-
-      const { order, donationId } = orderResponse;
-
-      const loaded = await loadRazorpay();
-
-      if (!loaded) {
-        setLoadingPayment(false);
-        alert("Failed to load Razorpay.");
-        return;
-      }
-
-      const razorpay = new (window as any).Razorpay({
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-        amount: order.amount,
-        currency: order.currency,
-        order_id: order.id,
-        name: "Palle Palle Kuaata",
-        description: title,
-
-        prefill: {
-          name: data.fullName,
-          email: data.email,
-          contact: data.mobile,
-        },
-
-        handler: (response: any) => {
-          setLoadingPayment(false);
-          setProcessing(true);
-
-          void verifyPayment(response, donationId);
-        },
-
-        modal: {
-          ondismiss: () => {
-            setLoadingPayment(false);
-          },
-        },
-
-        theme: {
-          color: "#0A8754",
-        },
-      });
-
-      setLoadingPayment(false);
-      razorpay.open();
-    } catch (error: any) {
-      setLoadingPayment(false);
-      alert(error.response?.data?.message || "Something went wrong.");
-    }
-  };
-
-  // if (loadingPayment) {
-  //   return (
-  //     <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
-  //       <div className="text-center">
-  //         <div className="mx-auto h-12 w-12 animate-spin rounded-full border-4 border-gray-300 border-t-green-600" />
-
-  //         <h2 className="mt-6 text-xl font-semibold">
-  //           Preparing secure payment...
-  //         </h2>
-
-  //         <p className="mt-2 text-gray-500">
-  //           Please wait while we initialize your payment.
-  //         </p>
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
-  if (processing) {
-    return (
-     <div className="fixed inset-0 z-50 flex items-center justify-center bg-white">
-        <div className="text-center">
-          <div className="mx-auto h-12 w-12 animate-spin rounded-full border-4 border-gray-300 border-t-green-600" />
-
-          <h2 className="mt-6 text-xl font-semibold">
-            Verifying your payment...
-          </h2>
-
-          <p className="mt-2 text-gray-500">
-            Please wait. Do not refresh or close this page.
-          </p>
-        </div>
-      </div>
-    );
-  }
-
-  const donation = {
-    amount,
-    title,
-    description,
-  };
-
   return (
     <div className="container">
       <main className="pt-20">
         <section className="relative">
-          <HeroBanner />
+          <Banner />
 
-          <div className="section grid grid-cols-3 gap-4">
-            <div className="col-span-3 xl:col-span-2">
-              <YourDetailsForm onSubmitData={handleFormSubmit} loading={loadingPayment}/>
-            </div>
+          <div
+            className="relative z-20 mx-auto -mt-10 xl:-mt-30 section"
+            id="donate-card"
+          >
+            <DonationCard />
+          </div>
+        </section>
 
-            <div className="col-span-3 xl:col-span-1 space-y-4">
-              <DonationSummary donation={donation} />
-              <DonationHelp />
+        <section className="section">
+          <div className="flex flex-col gap-8 rounded-2xl bg-[#F6F8F5] p-4 md:p-8">
+            <h2 className="text-[28px] md:text-[40px] font-bold uppercase">
+              Your Donation Makes an Impact
+            </h2>
+
+            <div className="grid grid-cols-1 gap-9 md:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+              {impactData.map((item) => (
+                <ImpactCard key={item.id} item={item} />
+              ))}
             </div>
           </div>
-
-          <TrustStats />
         </section>
+
+        <section className="section">
+          <div className="flex flex-col gap-8 rounded-2xl bg-[#F6F8F5] p-4 md:p-8">
+            <h2 className="text-[28px] md:text-[40px] font-bold uppercase">
+              Other Ways to Give
+            </h2>
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {giveData.map((item) => (
+                <OtherWays key={item.id} item={item} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* <section className="section">
+          <TaxBanner />
+        </section> */}
+        <section className="section">
+          <div className="grid gap-8 rounded-2xl bg-[#F6F8F5] p-6 md:grid-cols-2 xl:grid-cols-4">
+            {trustData.map((item) => (
+              <TrustCard key={item.id} item={item} />
+            ))}
+          </div>
+        </section>
+        <section className="section">
+          <BeTheReason/>
+        </section>
+
       </main>
     </div>
   );

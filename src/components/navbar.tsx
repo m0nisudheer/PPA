@@ -11,6 +11,7 @@ import {
   X,
 } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -30,6 +31,7 @@ const resourceLinks = [
 ];
 
 export default function Navbar() {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState<"main" | "resources">("main");
 
@@ -63,8 +65,8 @@ export default function Navbar() {
             />
           </Link>
 
-          <div className="hidden items-center gap-10 xl:flex">
-            <nav className="flex items-center gap-8">
+          <div className="hidden items-center gap-6 xl:gap-10 lg:flex">
+            <nav className="flex items-center gap-5 xl:gap-8">
               {navItems.map((item) => (
                 <Link
                   key={item.name}
@@ -80,12 +82,13 @@ export default function Navbar() {
               </button>
             </nav>
             <button
-              onClick={() => {
-                document.getElementById("donate-card")?.scrollIntoView({
-                  behavior: "smooth",
-                  block: "start",
-                });
-              }}
+              // onClick={() => {
+              //   document.getElementById("donate-card")?.scrollIntoView({
+              //     behavior: "smooth",
+              //     block: "start",
+              //   });
+              // }}
+              onClick={() => router.push("/donate")}
               className="inline-flex items-center gap-2 rounded bg-[#6F962C] px-6 py-2 text-sm font-normal text-white transition hover:bg-[#011C3E] cursor-pointer"
             >
               <span>DONATE NOW</span>
@@ -98,7 +101,7 @@ export default function Navbar() {
               setOpen(true);
               setPage("main");
             }}
-            className="xl:hidden p-2 text-gray-800"
+            className="lg:hidden p-2 text-gray-800"
             aria-label="Open menu"
           >
             <Menu size={26} />
@@ -107,7 +110,7 @@ export default function Navbar() {
       </nav>
 
       <div
-        className={`fixed inset-0 z-[9999]  xl:hidden transition-all duration-300 ${open ? "visible" : "invisible"}`}
+        className={`fixed inset-0 z-[9999]  lg:hidden transition-all duration-300 ${open ? "visible" : "invisible"}`}
       >
         <div
           className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${open ? "opacity-100" : "opacity-0"}`}
@@ -169,7 +172,10 @@ export default function Navbar() {
                 </button>
 
                 <button
-                  onClick={closeMenu}
+                  onClick={() => {
+                    closeMenu();
+                    router.push("/donate");
+                  }}
                   className="w-full inline-flex items-center justify-center gap-2 rounded bg-[#6F962C] px-6 py-3 text-[15px] md:text-[25px] font-semibold text-white transition hover:bg-[#011C3E]"
                 >
                   DONATE NOW
