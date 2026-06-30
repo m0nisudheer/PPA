@@ -892,6 +892,7 @@ export default function DonationSuccessful({ data }: DonationSuccessfulProps) {
   const total = donation.amount + donation.platformFee;
   const router = useRouter();
   const [downloading, setDownloading] = useState(false);
+  const [viewingReceipt, setViewingReceipt] = useState(false);
 
   const handleDownload = async () => {
     setDownloading(true);
@@ -905,12 +906,22 @@ export default function DonationSuccessful({ data }: DonationSuccessfulProps) {
   };
 
   const handleViewReceipt = async () => {
-    const doc = await createReceiptPDF(data);
+    setViewingReceipt(true);
 
-    const blob = doc.output("blob");
-    const url = URL.createObjectURL(blob);
+    try {
+      const doc = await createReceiptPDF(data);
 
-    window.open(url, "_blank");
+      const blob = doc.output("blob");
+      const url = URL.createObjectURL(blob);
+
+      window.open(url, "_blank");
+
+      setTimeout(() => {
+        URL.revokeObjectURL(url);
+      }, 1000);
+    } finally {
+      setViewingReceipt(false);
+    }
   };
 
   return (
@@ -1026,10 +1037,20 @@ export default function DonationSuccessful({ data }: DonationSuccessfulProps) {
         <div className="grid grid-cols-2 gap-3">
           <button
             onClick={handleViewReceipt}
-            className="cursor-pointer flex items-center justify-center gap-2 rounded-xl border border-[#E5E7EB] bg-white py-3.5 text-sm font-semibold text-[#374151] transition-colors hover:bg-gray-50"
+            disabled={viewingReceipt}
+            className="flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-[#E5E7EB] bg-white py-3.5 text-sm font-semibold text-[#374151] transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            <Mail size={16} />
-            View Receipt
+            {viewingReceipt ? (
+              <>
+                <span className="h-4 w-4 animate-spin rounded-full border-2 border-[#374151] border-t-transparent" />
+                Opening...
+              </>
+            ) : (
+              <>
+                <Mail size={16} />
+                View Receipt
+              </>
+            )}
           </button>
 
           <button
