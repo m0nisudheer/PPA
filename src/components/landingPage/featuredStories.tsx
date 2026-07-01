@@ -2,6 +2,7 @@ import { ArrowRight, PersonStanding } from "lucide-react";
 import Image from "next/image";
 import { FaRunning } from "react-icons/fa";
 
+
 const FeaturedStories = () => {
   const stories = [
     {
