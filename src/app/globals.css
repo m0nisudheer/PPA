@@ -75,7 +75,7 @@ body {
 }
 
 .section {
-  @apply py-5 px-4 md:px-9 md:py-8 lg:py-10 2xl:px-14 2xl:py-5;
+  @apply py-5 px-4 md:px-9 md:py-8 2xl:px-14 2xl:py-5;
 }
 
 .hero {

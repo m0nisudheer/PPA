@@ -30,12 +30,12 @@ export default function DonationBanner() {
 
         <div className="relative z-10 grid items-center gap-6 lg:gap-2 2xl:gap-6 lg:grid-cols-12">
           <div className="lg:col-span-4 flex flex-col gap-3">
-            <h2 className="text-[22px] font-semibold leading-[110%] md:text-[36px]">
+            <h2 className="text-[24px] xl:text-[28px] font-semibold leading-[110%] 2xl:text-[36px]">
               One opportunity can <br className="hidden lg:block" />
               change a life.
             </h2>
 
-            <p className="text-[18px] leading-[150%] tracking-normal text-[#FFFFFF]">
+            <p className="text-[18px] 2xl:text-[20px] leading-[150%] tracking-normal text-[#FFFFFF]">
               Your support can help a child discover their talent and build a
               better future through sports.
             </p>
@@ -50,7 +50,6 @@ export default function DonationBanner() {
               className="
               relative
               z-10
-           
               w-auto
               object-contain
               transition-all
@@ -64,11 +63,11 @@ export default function DonationBanner() {
           </div>
 
           <div className="lg:col-span-4 flex flex-col gap-2">
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              {donationOptions.map((item) => (
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-2 2xl:gap-3">
+              {donationOptions.map((item, index) => (
                 <button
                   key={item.amount}
-                  className="
+                  className={`
                   rounded-lg
                   border
                   border-white/30
@@ -80,45 +79,47 @@ export default function DonationBanner() {
                   duration-300
                   hover:border-[#74A73D]
                   hover:bg-white/10
-                "
+                  ${
+                    index === donationOptions.length - 1
+                      ? "col-span-2 md:col-span-1"
+                      : ""
+                  }
+                `}
                 >
                   <div className="flex flex-col gap-1">
-                    <h3 className="text-[26px] font-semibold leading-[100%] tracking-normal">
+                    <h3 className="text-[20px] 2xl:text-[26px] font-semibold leading-[100%] tracking-normal">
                       {item.amount}
                     </h3>
 
-                    <p className="text-[14px] leading-[150%] tracking-normal">
+                    <p className="text-[13px] 2xl:text-[15px] leading-[150%] tracking-normal">
                       {item.title}
                     </p>
                   </div>
                 </button>
               ))}
             </div>
-
-            {/* <p className=" text-[#586690] text-[15px] leading-[150%] tracking-normal">
-              All donations are eligible for 80G tax exemption.
-            </p> */}
           </div>
 
           <div className="flex justify-center lg:col-span-2 lg:justify-end">
             <button
               className="
-            cursor-pointer
+              cursor-pointer
               flex
               items-center
               gap-2
               rounded-md
               bg-[#6F962C]
-              px-6
-              py-3
+              px-4
+              py-2
+              2xl:px-6
+              2xl:py-3
               text-[12px]
               font-semibold
               uppercase
               tracking-wide
-            
               duration-300
               hover:text-[#6F962C]
-      hover:bg-white
+              hover:bg-white
       
             "
             >

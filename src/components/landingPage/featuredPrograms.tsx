@@ -24,12 +24,12 @@ export default function FeaturedPrograms() {
       <div className="2xl:py-10 flex flex-col gap-6">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-0">
           <div className="flex flex-col gap-1">
-            <p className="text-[18px] font-semibold uppercase tracking-wider text-[#6F962C]">
+            <p className="text-[16px] 2xl:text-[18px] font-semibold uppercase tracking-wider text-[#6F962C]">
               Featured Programs
             </p>
 
-            <div className="flex flex-col gap-2">
-              <h2 className="font-semibold leading-[140%] md:leading-tight text-[#222D4E] text-[28px] lg:text-[42px]">
+            <div className="flex flex-col gap-1 md:gap-2">
+              <h2 className="font-semibold leading-[140%] md:leading-tight text-[#222D4E] text-[28px] 2xl:text-[42px]">
                 Building Strong Foundation.
               </h2>
 
@@ -37,44 +37,43 @@ export default function FeaturedPrograms() {
             </div>
           </div>
 
-          <button className="group items-center gap-2 text-sm font-semibold uppercase text-[#24345A] flex">
+          <button className="cursor-pointer group flex items-center gap-2 text-[13px] 2xl:text-sm font-semibold uppercase text-[#24345A]">
             View All Programs
             <ArrowRight
-              size={16}
+              size={14}
               className="transition-transform group-hover:translate-x-1"
             />
           </button>
         </div>
 
-        <div className="grid gap-4 xl:gap-6 md:grid-cols-2 2xl:grid-cols-3">
+        <div className="grid gap-2 2xl:gap-4 md:grid-cols-2 xl:grid-cols-3">
           {programs.map((item, index) => {
             const Icon = item.icon;
 
             return (
               <div
                 key={index}
-                className="rounded-2xl border border-[#DCDCDC] p-4"
+                className="rounded-xl border border-[#DCDCDC] px-4 py-3 2xl:px-6 2xl:py-4"
               >
                 <div className="flex items-center gap-6">
-                  <div className="flex h-10 w-10 md:h-16 md:w-16 shrink-0 items-center justify-center rounded-full">
+                  <div className="flex h-10 w-10 2xl:h-16 2xl:w-16 shrink-0 items-center justify-center rounded-full">
                     <Icon className="text-[#74A73D]" size={34} />
                   </div>
 
                   <div className="flex flex-col justify-between gap-6 ">
                     <div className="space-y-2">
-                      <h3 className="text-[18px] md:text-[20px] font-semibold leading-none text-[#222D4E]">
+                      <h3 className="text-[18px] 2xl:text-[20px] font-semibold leading-none text-[#222D4E]">
                         {item.title}
                       </h3>
-
-                      <p className="text-[16px] md:text-[18px] leading-6 text-[#595959]">
+                      <p className="text-[15px] 2xl:text-[18px] leading-[120%] 2xl:leading-[150%] text-[#595959]">
                         {item.description}
                       </p>
                     </div>
 
-                    <button className="cursor-pointer group flex w-fit items-center gap-2 text-[16px] font-semibold text-[#6BB643] transition-all">
+                    <button className="cursor-pointer group flex w-fit items-center gap-2 text-[14px] 2xl:text-sm font-semibold text-[#6BB643] transition-all">
                       <span>Learn More</span>
                       <ArrowRight
-                        size={18}
+                        size={16}
                         className="transition-transform duration-300 group-hover:translate-x-1"
                       />
                     </button>

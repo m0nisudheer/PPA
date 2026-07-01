@@ -53,7 +53,7 @@ export default function Navbar() {
         <div className="container mx-auto flex h-16 items-center justify-between">
           <Link
             href="/"
-            className="relative z-50 flex h-16 w-16 lg:h-28 lg:w-28 lg:translate-y-6 items-center justify-center rounded-full bg-white lg:shadow-md"
+            className="relative z-50 flex h-16 w-16 xl:w-24 xl:h-24 2xl:h-28 2xl:w-28 lg:translate-y-6 items-center justify-center rounded-full bg-white lg:shadow-md"
           >
             <Image
               src="/images/logo.png"
@@ -61,17 +61,17 @@ export default function Navbar() {
               width={60}
               height={60}
               priority
-              className="object-contain w-16 h-16 lg:w-20 lg:h-20"
+              className="object-contain w-16 h-16 xl:w-18 md:h-18 2xl:w-20 2xl:h-20"
             />
           </Link>
 
-          <div className="hidden items-center gap-6 xl:gap-10 lg:flex">
-            <nav className="flex items-center gap-5 xl:gap-8">
+          <div className="hidden items-center gap-6 xl:gap-8 2xl:gap-10 lg:flex">
+            <nav className="flex items-center gap-5 xl:gap-6 2xl:gap-8">
               {navItems.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="font-montserrat text-[16px] font-medium transition hover:text-[#2E8B3D]"
+                  className="font-montserrat text-[14px] 2xl:text-[16px] font-medium transition hover:text-[#2E8B3D]"
                 >
                   {item.name}
                 </Link>
@@ -89,7 +89,7 @@ export default function Navbar() {
               //   });
               // }}
               onClick={() => router.push("/donate")}
-              className="inline-flex items-center gap-2 rounded bg-[#6F962C] px-6 py-2 text-sm font-normal text-white transition hover:bg-[#011C3E] cursor-pointer"
+              className="inline-flex items-center gap-2 rounded bg-[#6F962C] px-6 py-2 text-[14px] 2xl:text-sm font-normal text-white transition hover:bg-[#011C3E] cursor-pointer"
             >
               <span>DONATE NOW</span>
               <Heart className="h-4 w-4 fill-white text-white" />

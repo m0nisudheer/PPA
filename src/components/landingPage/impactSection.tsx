@@ -89,25 +89,27 @@ const cards: Card[] = [
 export default function ImpactSection() {
   return (
     <section className="section">
-      <div className="2xl:py-10 grid gap-4 xl:gap-6 lg:grid-cols-2 2xl:grid-cols-3">
+      <div className="2xl:py-10 grid gap-2 2xl:gap-4 lg:grid-cols-3">
         {cards.map((card) => (
           <div
             key={card.title}
             className={`flex flex-col ${
-              card.type === "patronisers" ? "gap-2.5" : "gap-4"
-            } rounded-2xl border border-[#DCDCDC] bg-[#FFFFFF] p-4 md:p-6`}
+              card.type === "patronisers"
+                ? "gap-[5px] 2xl:gap-2.5"
+                : "gap-2 2xl:gap-4"
+            } rounded-2xl border border-[#DCDCDC] bg-[#FFFFFF] p-4 2xl:p-6`}
           >
             <div className="flex flex-col gap-1">
-              <h3 className="text-center text-[20px] font-semibold uppercase text-[#6F962C] leading-[120%] tracking-normal">
+              <h3 className="text-center text-[16px] 2xl:text-[20px] font-semibold uppercase text-[#6F962C] leading-[120%] tracking-normal">
                 {card.title}
               </h3>
               {card.type === "partners" && (
-                <p className="text-center text-[17px] font-semibold text-[#222D4E] leading-[120%] tracking-normal">
+                <p className="text-center text-[13px] 2xl:text-[17px] font-semibold text-[#222D4E] leading-[140%] tracking-normal">
                   {card.subtitle}
                 </p>
               )}
               {card.type === "patronisers" && (
-                <p className="text-center text-[17px] font-semibold text-[#222D4E] leading-[120%] tracking-normal">
+                <p className="text-center text-[13px] 2xl:text-[17px] font-semibold text-[#222D4E] leading-[140%] tracking-normal">
                   {card.subtitle}
                 </p>
               )}
@@ -121,27 +123,28 @@ export default function ImpactSection() {
                     alt="India Map"
                     width={150}
                     height={180}
-                    className="h-48 w-56"
+                    className="h-36 2xl:h-48 2xl:w-56"
                   />
 
                   <div className="w-full flex flex-col gap-6">
-                    <div className="space-y-4">
+                    <div className="space-y-2 2xl:space-y-4">
                       {card.stats.map((item) => {
                         const Icon = item.icon;
 
                         return (
                           <div
                             key={item.label}
-                            className="flex items-center gap-3"
+                            className="flex items-center gap-2 2xl:gap-3"
                           >
-                            <Icon size={22} className="text-[#343330]" />
+                            <Icon className="h-[20px] w-[20px] 2xl:h-[25px] 2xl:w-[25px] text-[#343330]" />
+                            {/* <Icon size={22} className="text-[#343330]" /> */}
 
                             <div className="flex items-center gap-1">
-                              <span className="text-[22px] md:text-[20px] font-semibold text-[#222D4E]">
+                              <span className="text-[18px] 2xl:text-[22px] font-semibold text-[#222D4E]">
                                 {item.value}
                               </span>
 
-                              <span className="text-[15px] text-[#595959]">
+                              <span className="text-[12px] 2xl:text-[16px] text-[#595959]">
                                 {item.label}
                               </span>
                             </div>
@@ -150,7 +153,7 @@ export default function ImpactSection() {
                       })}
                     </div>
 
-                    <button className="cursor-pointer group flex items-center gap-2 text-sm font-semibold uppercase text-[#74A73D]">
+                    <button className="cursor-pointer group flex items-center gap-2 text-[12px] 2xl:text-sm font-semibold uppercase text-[#74A73D]">
                       {card.button}
 
                       <ArrowRight
@@ -166,23 +169,28 @@ export default function ImpactSection() {
             <div>
               {card.type === "partners" && (
                 <div className="flex flex-col gap-7">
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4">
-                    {card.logos.map((logo) => (
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-2 2xl:gap-4">
+                    {card.logos.map((logo, index) => (
                       <div
                         key={logo}
-                        className="flex h-24 items-center justify-center rounded-xl border border-[#DCDCDC]"
+                        className={`flex h-24 items-center justify-center rounded-xl border border-[#DCDCDC] ${
+                          index === card.logos.length - 1
+                            ? "col-span-2 md:col-span-1"
+                            : ""
+                        }`}
                       >
                         <Image
                           src={logo}
                           alt="Partner Logo"
                           width={90}
                           height={50}
+                          className="w-auto h-auto object-contain"
                         />
                       </div>
                     ))}
                   </div>
 
-                  <button className="cursor-pointer group mx-auto flex items-center gap-2 text-sm font-semibold uppercase text-[#74A73D]">
+                  <button className="cursor-pointer group mx-auto flex items-center gap-2 text-[12px] 2xl:text-sm font-semibold uppercase text-[#74A73D]">
                     {card.button}
 
                     <ArrowRight
@@ -213,7 +221,7 @@ export default function ImpactSection() {
                     ))}
                   </div>
 
-                  <button className="group mx-auto flex items-center gap-2 text-sm font-semibold uppercase text-[#74A73D]">
+                  <button className="cursor-pointer group flex mx-auto items-center gap-2 text-[12px] 2xl:text-sm font-semibold uppercase text-[#74A73D]">
                     {card.button}
 
                     <ArrowRight
