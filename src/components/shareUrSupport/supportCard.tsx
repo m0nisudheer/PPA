@@ -169,16 +169,16 @@ export default function SupportCard() {
     const amount = useDonationStore((state) => state.amount);
     const title = useDonationStore((state) => state.title);
     const description = useDonationStore((state) => state.description);
-    const platformFee = 50;
-  const total = Number(amount) + platformFee;
+    // const platformFee = 50;
+  const total = Number(amount);
 
   return (
     <div className="flex flex-col gap-6 rounded-2xl px-5 py-7 md:px-6 md:py-8 shadow-sm bg-white mx-auto">
       <div className="flex flex-col items-center gap-2 md:gap-1 text-center">
-        <h2 className="text-[20px] md:text-[28px] font-bold text-[#111827] leading-[100%] tracking-normal">
+        <h2 className="text-[20px] 2xl:text-[28px] font-bold text-[#111827] leading-[100%] tracking-normal">
           Share Your Support
         </h2>
-        <p className="text-[15px] md:text-[16px] text-[#6B7280] leading-[100%] tracking-normal">
+        <p className="text-[15px] 2xl:text-[16px] text-[#6B7280] leading-[100%] tracking-normal">
           Choose your favorite way to share and inspire others to support rural
           talent.
         </p>
@@ -205,7 +205,7 @@ export default function SupportCard() {
       {activeTab === "social" && (
         <div className="flex flex-col gap-5">
           <div className="flex flex-col items-center gap-1">
-            <p className="text-[15px] md:text-[18px] font-bold text-[#0A2540] leading-[110%] tracking-normal">
+            <p className="text-[15px] 2xl:text-[18px] font-bold text-[#0A2540] leading-[110%] tracking-normal">
               Share on Social Media
             </p>
             <p className="text-[15px] text-[#6B7280] leading-[110%] tracking-normal text-center">
@@ -214,22 +214,24 @@ export default function SupportCard() {
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8 lg:gap-12">
-            {SOCIAL_PLATFORMS.map((p) => (
-              <button key={p.label} className="flex items-center gap-2">
-                {p.prefix}
-                <span className={`text-[20px] ${p.textClass}`}>{p.label}</span>
-              </button>
-            ))}
-            <button className="flex items-center gap-2 rounded-lg bg-[#6B7280] px-4 py-1 md:px-6 md:py-1 text-white text-[18px] font-medium hover:bg-[#4B5563] transition-colors">
+          {SOCIAL_PLATFORMS.map((p) => (
+  <button key={p.label} className="flex items-center gap-1.5">
+    {p.prefix}
+    <span className={`text-[18px] 2xl:text-[20px] ${p.textClass}`}>
+      {p.label}
+    </span>
+  </button>
+))}
+            <button className="flex items-center gap-2 rounded-lg bg-[#6B7280] px-4 py-1 2xl:px-6 2xl:py-1 text-white text-[16px] 2xl:text-[18px] font-medium hover:bg-[#4B5563] transition-colors">
               <Share2 size={15} />
               More
             </button>
           </div>
 
-          <div className="grid grid-cols-1 gap-5 xl:grid-cols-2">
+          <div className="grid grid-cols-1 gap-2 2xl:gap-4 xl:grid-cols-2">
             <div className="flex flex-col gap-3">
               <div>
-                <p className="text-[16px] md:text-[18px] font-bold text-[#0A2540]">
+                <p className="text-[16px] 2xl:text-[18px] font-bold text-[#0A2540]">
                   Share Preview
                 </p>
                 <p className="text-[15px] text-[#6B7280]">
@@ -243,8 +245,8 @@ export default function SupportCard() {
                     "
                   </div>
                   <div className="flex-1 flex gap-3">
-                    <div className="flex flex-col md:flex-row gap-6">
-                      <div className="text-[15px] md:text-[18px] text-[#0A2540] font-medium flex flex-col gap-2 px-5">
+                    <div className="flex flex-col xl:flex-row gap-6">
+                      <div className="text-[15px] 2xl:text-[18px] text-[#0A2540] font-medium flex flex-col gap-2 2xl:px-5">
                         <div>
                           I just supported rural talent through Palle Palleku
                           Aata.
@@ -279,9 +281,9 @@ export default function SupportCard() {
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <label className="text-[15px] md:text-[16px] font-bold text-[#0A2540]">
+                <label className="text-[15px] 2xl:text-[16px] font-bold text-[#0A2540]">
                   Add a Personal Message{" "}
-                  <span className="font-normal text-[13px] md:text-[15px] text-[#9CA3AF]">
+                  <span className="font-normal text-[13px] 2xl:text-[15px] text-[#9CA3AF]">
                     (Optional)
                   </span>
                 </label>
@@ -290,7 +292,7 @@ export default function SupportCard() {
                   value={message}
                   onChange={(e) => setMessage(e.target.value.slice(0, MAX))}
                   rows={4}
-                  className="w-full rounded-lg border border-[#E5E7EB] px-3 py-2.5 text-[17px] text-[#111827] placeholder:text-[#9CA3AF] outline-none focus:border-[#1A7A3C] focus:ring-2 focus:ring-[#1A7A3C]/20 resize-none"
+                  className="w-full rounded-lg border border-[#E5E7EB] px-3 py-2.5 text-[15px] 2xl:text-[17px] text-[#111827] placeholder:text-[#9CA3AF] outline-none focus:border-[#1A7A3C] focus:ring-2 focus:ring-[#1A7A3C]/20 resize-none"
                 />
                 <p className="text-[11px] text-[#9CA3AF] text-right">
                   {message.length}/{MAX}
@@ -303,10 +305,10 @@ export default function SupportCard() {
                   className="text-[#1A7A3C] mt-0.5 shrink-0"
                 />
                 <div className="flex flex-col gap-2">
-                  <p className="text-[15px] md:text-[16px] font-bold text-[#1B7339] leading-[100%] tracking-normal">
+                  <p className="text-[15px] 2xl:text-[16px] font-bold text-[#1B7339] leading-[100%] tracking-normal">
                     Tip: Personalize your message
                   </p>
-                  <p className="text-[15px] md:text-[16px] text-[#166534CC] leading-[130%] md:leading-[100%] tracking-normal">
+                  <p className="text-[15px] 2xl:text-[16px] text-[#166534CC] leading-[130%] 2xl:leading-[100%] tracking-normal">
                     Adding a personal note makes your post more meaningful and
                     encourages more people to take action.
                   </p>
@@ -317,15 +319,15 @@ export default function SupportCard() {
             <div className="flex flex-col gap-4">
               <div className="rounded-xl border bg-[#F9FAFB] border-[#E5E7EB] p-4 flex flex-col gap-6">
                 <div className="flex items-center justify-between">
-                  <p className="text-[15px] md:text-[16px] leading-[100%] tracking-normal font-bold text-[#15803D]">
+                  <p className="text-[15px] 2xl:text-[16px] leading-[100%] tracking-normal font-bold text-[#15803D]">
                     Donation Summary
                   </p>
-                  <a
+                  {/* <a
                     href="#"
                     className="text-[13px] font-medium text-[#1A7A3C] hover:underline"
                   >
                     View Receipt
-                  </a>
+                  </a> */}
                 </div>
 
                 <div className="flex items-start gap-3 rounded-lg bg-[white] border border-[#E5E7EB] p-3">
@@ -333,10 +335,10 @@ export default function SupportCard() {
                     <Support active={true} />
                   </div>
                   <div className="flex flex-col gap-1">
-                    <p className="text-[20px] md:text-[26px] font-bold text-[#0A2540] leading-[100%] tracking-normal">
+                    <p className="text-[20px] 2xl:text-[26px] font-bold text-[#0A2540] leading-[100%] tracking-normal">
                       {amount}
                     </p>
-                    <p className="text-[15px] md:text-[16px] font-bold text-[#0A2540] ">
+                    <p className="text-[15px] 2xl:text-[16px] font-bold text-[#0A2540] ">
                       {title}
                     </p>
                     <p className="text-[14px] text-[#6B7280] leading-[130%] md:leading-[100%] tracking-normal">
@@ -351,23 +353,23 @@ export default function SupportCard() {
       label: "Donation Amount",
       value: `₹${Number(amount).toLocaleString("en-IN")}`,
     },
-    {
-      label: "Platform Fee",
-      value: `₹${platformFee.toLocaleString("en-IN")}`,
-    },
+    // {
+    //   label: "Platform Fee",
+    //   value: `₹${platformFee.toLocaleString("en-IN")}`,
+    // },
   ].map(({ label, value }) => (
     <div
       key={label}
-      className="flex justify-between text-[15px] md:text-[16px] text-[#4B5563]"
+      className="flex justify-between text-[15px] 2xl:text-[16px] text-[#4B5563]"
     >
       <span>{label}</span>
       <span>{value}</span>
     </div>
   ))}
 
-  <div className="flex justify-between border-t border-[#E5E7EB] py-2 text-[16px] font-bold text-[#0A2540]">
+  <div className="flex justify-between border-t border-[#E5E7EB] py-2 text-[15px] 2xl:text-[16px] font-bold text-[#0A2540]">
     <span>Total Amount</span>
-    <span className="text-[18px] font-bold leading-none tracking-normal text-[#16A34A] md:text-[20px]">
+    <span className="text-[18px] font-bold leading-none tracking-normal text-[#16A34A] 2xl:text-[20px]">
       ₹{total.toLocaleString("en-IN")}
     </span>
   </div>
@@ -375,7 +377,7 @@ export default function SupportCard() {
               </div>
 
               <div className="rounded-xl border border-[#E5E7EB] p-4 flex flex-col gap-5">
-                <p className="text-[15px] md:text-[16px] font-bold text-[#15803D] leading-[120%] md:leading-[30px] tracking-normal">
+                <p className="text-[15px] 2xl:text-[16px] font-bold text-[#15803D] leading-[120%] 2xl:leading-[30px] tracking-normal">
                   Your Impact Matters
                 </p>
                 <div className="space-y-4">
@@ -389,10 +391,10 @@ export default function SupportCard() {
                         </div>
 
                         <div className="flex flex-col gap-2">
-                          <p className="text-[15px] md:text-[16px] font-bold text-[#0A2540] leading-[130%] md:leading-[100%] tracking-normal">
+                          <p className="text-[15px] 2xl:text-[16px] font-bold text-[#0A2540] leading-[130%] 2xl:leading-[100%] tracking-normal">
                             {pt.title}
                           </p>
-                          <p className="text-[15px] md:text-[16px] text-[#6B7280] leading-[120%] md:leading-[100%] tracking-normal">
+                          <p className="text-[15px] 2xl:text-[16px] text-[#6B7280] leading-[120%] 2xl:leading-[100%] tracking-normal">
                             {pt.desc}
                           </p>
                         </div>

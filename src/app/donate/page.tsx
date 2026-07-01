@@ -124,15 +124,15 @@ const Page = () => {
           </div>
         </section>
 
-        <section className="section">
-          <div className="flex flex-col gap-8 rounded-2xl bg-[#F6F8F5] p-4 md:p-8">
-            <h2 className="text-[28px] md:text-[40px] font-bold uppercase">
-              Your Donation Makes an Impact
+           <section className="px-4 md:px-9 2xl:px-14">
+          <div className="flex flex-col gap-4 2xl:gap-8 rounded-2xl bg-[#F6F8F5] p-4 md:p-8">
+           <h2 className="text-[28px] md:text-[34px] 2xl:text-[40px] font-bold uppercase">
+              Other Ways to Give
             </h2>
 
-            <div className="grid grid-cols-1 gap-9 md:gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-              {impactData.map((item) => (
-                <ImpactCard key={item.id} item={item} />
+            <div className="grid gap-2 2xl:gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {giveData.map((item) => (
+                <OtherWays key={item.id} item={item} />
               ))}
             </div>
           </div>
@@ -140,13 +140,13 @@ const Page = () => {
 
         <section className="section">
           <div className="flex flex-col gap-8 rounded-2xl bg-[#F6F8F5] p-4 md:p-8">
-            <h2 className="text-[28px] md:text-[40px] font-bold uppercase">
-              Other Ways to Give
+            <h2 className="text-[28px] md:text-[34px] 2xl:text-[40px] font-bold uppercase">
+              Your Donation Makes an Impact
             </h2>
 
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {giveData.map((item) => (
-                <OtherWays key={item.id} item={item} />
+            <div className="grid grid-cols-1 gap-2 2xl:gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+              {impactData.map((item) => (
+                <ImpactCard key={item.id} item={item} />
               ))}
             </div>
           </div>

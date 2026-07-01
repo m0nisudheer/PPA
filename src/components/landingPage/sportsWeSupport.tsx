@@ -11,33 +11,33 @@ import { GiCricketBat } from "react-icons/gi";
 
 const sports = [
   {
-    title: "Athletics",
+    title: "Running",
     image: "/images/sportsWeSupport/Athletics.png",
     icon: FaRunning,
   },
   {
-    title: "Cricket",
-    image: "/images/sportsWeSupport/Cricket.png",
-    icon: GiCricketBat,
-  },
-  {
-    title: "Hockey",
-    image: "/images/sportsWeSupport/Hockey.png",
-    icon: Dumbbell,
-  },
-  {
-    title: "Kabaddi",
-    image: "/images/sportsWeSupport/Kabaddi.png",
+    title: "High Jump",
+    image: "/images/sportsWeSupport/highJump.png",
     icon: FaRunning,
   },
   {
-    title: "Football",
-    image: "/images/sportsWeSupport/Football.png",
+    title: "Shot Put",
+    image: "/images/sportsWeSupport/ShotPut.png",
+    icon: Dumbbell,
+  },
+  {
+    title: "Hurdles",
+    image: "/images/sportsWeSupport/huddle.png",
+    icon: FaRunning,
+  },
+  {
+    title: "Javelin Throw",
+    image: "/images/sportsWeSupport/javelinThrow.png",
     icon: Goal,
   },
   {
-    title: "Volleyball",
-    image: "/images/sportsWeSupport/Volleyball.png",
+    title: "Long Jump",
+    image: "/images/sportsWeSupport/longJump.png",
     icon: Volleyball,
   },
 ];

@@ -34,7 +34,7 @@ interface DonorInfo {
 interface DonationInfo {
   purpose: string;
   amount: number;
-  platformFee: number;
+  // platformFee: number;
 }
 
 interface TransactionInfo {
@@ -299,7 +299,7 @@ async function createReceiptPDF(data: ReceiptData): Promise<any> {
   const DARK = "#111827";
   const WHITE = "#ffffff";
 
-  const total = data.donation.amount + data.donation.platformFee;
+  const total = data.donation.amount;
   const fmt = (n: number) => "Rs." + n.toLocaleString("en-IN");
 
   type FontStyle = "normal" | "bold" | "italic" | "bolditalic";
@@ -627,7 +627,7 @@ async function createReceiptPDF(data: ReceiptData): Promise<any> {
   const summaryRows: [string, string][] = [
     ["Purpose", data.donation.purpose],
     ["Donation", fmt(data.donation.amount)],
-    ["Platform Fee", fmt(data.donation.platformFee)],
+    // ["Platform Fee", fmt(data.donation.platformFee)],
   ];
 
   let sy = donorY + 54;
@@ -889,7 +889,7 @@ async function createReceiptPDF(data: ReceiptData): Promise<any> {
 
 export default function DonationSuccessful({ data }: DonationSuccessfulProps) {
   const { donation } = data;
-  const total = donation.amount + donation.platformFee;
+  const total = donation.amount;
   const router = useRouter();
   const [downloading, setDownloading] = useState(false);
   const [viewingReceipt, setViewingReceipt] = useState(false);
@@ -956,10 +956,10 @@ export default function DonationSuccessful({ data }: DonationSuccessfulProps) {
       </div>
 
       <div className="flex flex-col items-center gap-2 text-center">
-        <h2 className="text-[26px] md:text-[30px] font-bold text-[#111827] leading-tight">
+        <h2 className="text-[26px] 2xl:text-[30px] font-bold text-[#111827] leading-tight">
           Donation Successful!
         </h2>
-        <p className="text-[15px] md:text-[18px] text-[#6B7280]">
+        <p className="text-[15px] 2xl:text-[18px] text-[#6B7280]">
           Thank you for believing in rural talent and supporting our mission.
         </p>
       </div>
@@ -971,7 +971,7 @@ export default function DonationSuccessful({ data }: DonationSuccessfulProps) {
       </div> */}
 
       <div className="flex flex-col gap-3 w-full rounded-2xl border border-[#E5E7EB] bg-[#F9FAFB] p-3">
-        <h3 className="text-[17px] font-bold text-[#111827]">
+        <h3 className="text-[15px] 2xl:text-[17px] font-bold text-[#111827]">
           Transaction Details
         </h3>
 
@@ -997,7 +997,9 @@ export default function DonationSuccessful({ data }: DonationSuccessfulProps) {
             },
           ].map(({ label, value, bold, isStatus }) => (
             <div key={label} className="flex items-center justify-between py-3">
-              <span className="text-[14px] text-[#6B7280]">{label}</span>
+              <span className="text-[13px] 2xl:text-[14px] text-[#6B7280]">
+                {label}
+              </span>
 
               {isStatus ? (
                 <span className="rounded-full bg-[#E9F7E5] px-3 py-1 text-[13px] font-semibold text-[#3A7D1E]">
@@ -1019,7 +1021,7 @@ export default function DonationSuccessful({ data }: DonationSuccessfulProps) {
         <button
           onClick={handleDownload}
           disabled={downloading}
-          className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-[#3A7D1E] py-4 text-sm font-bold uppercase tracking-widest text-white transition-colors hover:bg-[#2F6618] disabled:cursor-not-allowed disabled:opacity-60"
+          className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-md bg-[#3A7D1E] py-2.5 2xl:py-4 text-[14px] 2xl:text-sm font-bold uppercase tracking-widest text-white transition-colors hover:bg-[#2F6618] disabled:cursor-not-allowed disabled:opacity-60"
         >
           {downloading ? (
             <>
@@ -1038,7 +1040,7 @@ export default function DonationSuccessful({ data }: DonationSuccessfulProps) {
           <button
             onClick={handleViewReceipt}
             disabled={viewingReceipt}
-            className="flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-[#E5E7EB] bg-white py-3.5 text-sm font-semibold text-[#374151] transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-60"
+            className="flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-[#E5E7EB] bg-white py-2.5 2xl:py-4 text-[14px] 2xl:text-sm font-semibold text-[#374151] transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {viewingReceipt ? (
               <>
@@ -1055,7 +1057,7 @@ export default function DonationSuccessful({ data }: DonationSuccessfulProps) {
 
           <button
             onClick={() => router.push("/shareyour-support")}
-            className="flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-[#E5E7EB] bg-white py-3.5 text-sm font-semibold text-[#374151] transition-colors hover:bg-gray-50"
+            className="flex cursor-pointer items-center justify-center gap-2 rounded-xl border border-[#E5E7EB] bg-white py-2.5 2xl:py-4 text-[14px] 2xl:text-sm font-semibold text-[#374151] transition-colors hover:bg-gray-50"
           >
             <Share2 size={16} />
             Share Support

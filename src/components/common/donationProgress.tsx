@@ -145,7 +145,7 @@ export default function DonationProgress({
               </div>
 
               <p
-                className="mt-2.5 text-center text-[11px] md:text-[13px] font-medium leading-tight whitespace-nowrap"
+                className="mt-2.5 text-center text-[13px] 2xl:text-[15px] font-medium leading-tight whitespace-nowrap"
                 style={{
                   color: completed
                     ? "#6BB643"

@@ -14,7 +14,7 @@ export default function TrustCard({ item }: any) {
       <div>
         <h3 className="font-semibold">{item.title}</h3>
 
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="mt-1 text-[14px] 2xl:text-sm text-gray-500">
           {item.description}
         </p>
       </div>

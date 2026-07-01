@@ -58,7 +58,7 @@ export default function Banner() {
         className="py-14 px-4 md:px-9 2xl:px-14 relative flex-1 bg-cover bg-no-repeat"
         style={{
           backgroundImage:
-            "url('https://res.cloudinary.com/dg8zhu8fq/image/upload/f_auto,q_auto:good,w_1920,c_limit/v1782710827/negge7qzwiwsfe6ig3pr.png')",
+            "url('https://res.cloudinary.com/dg8zhu8fq/image/upload/f_auto,q_auto:good,w_1920,c_limit/v1782898388/mfrecrxjngk8ckck2iwg.png')",
         }}
       >
         <div className="relative z-10 mx-auto flex h-full items-center">
@@ -96,13 +96,14 @@ export default function Banner() {
               </div>
             </div>
 
-            <div className="mt-4 flex h-full justify-end">
+            <div className="mt-4 flex h-full items-end justify-end">
               <button className="group flex items-center gap-4">
-                <div className="flex h-9 w-9 md:h-11 md:w-11 xl:h-16 xl:w-16 items-center justify-center rounded-full border-2 border-white cursor-pointer group-hover:scale-105">
-                  <Play className="h-5 w-5 md:h-6 md:w-6 xl:h-8 xl:w-8 fill-white text-white" />
-                </div>
+                   <div className="flex h-10 w-10 2xl:h-16 2xl:w-16 items-center justify-center rounded-full border-2 border-white cursor-pointer group-hover:scale-105">
+                <Play className="h-4 w-4 2xl:h-8 2xl:w-8 fill-white text-white" />
+              </div>
 
-                <span className="text-[14px] md:text-[16px] xl:text-[18px] leading-[100%] tracking-normal uppercase text-white">
+
+                <span className="text-[14px] md:text-[16px] 2xl:text-[18px] leading-[100%] tracking-normal uppercase text-white">
                   WATCH OUR STORY
                 </span>
               </button>
@@ -119,7 +120,7 @@ export default function Banner() {
               return (
                 <div
                   key={index}
-                  className="relative flex flex-col md:flex-row items-center justify-center md:justify-start xl:justify-center gap-4 px-3 py-6 md:px-6 md:py-7"
+                  className="relative flex flex-col md:flex-row items-center justify-center md:justify-start xl:justify-center gap-4 px-3 py-6 2xl:px-6 2xl:py-7"
                 >
                   {index !== stats.length - 1 && (
                     <div className="absolute right-0 top-4 bottom-4 w-px bg-[#FFFFFF] hidden lg:block" />

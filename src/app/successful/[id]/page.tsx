@@ -1,14 +1,16 @@
 "use client";
 
 import { DonationSummary } from "@/src/components/donationSummary/summary";
-import DonationSuccessful, { ReceiptData } from "@/src/components/thankyou/donationSuccessful";
+import DonationSuccessful, {
+  ReceiptData,
+} from "@/src/components/thankyou/donationSuccessful";
 import HeroBanner from "@/src/components/thankyou/heroBanner";
 import { MadeDifference } from "@/src/components/thankyou/madeDifference";
 import WhatHappensNext from "@/src/components/thankyou/whatHappendNext";
 import { WouldYouLike } from "@/src/components/thankyou/wouldYouLike";
 import { useDonationStore } from "@/src/store/donationStore";
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";  
+import { useParams } from "next/navigation";
 import axios from "axios";
 
 const Page = () => {
@@ -16,7 +18,7 @@ const Page = () => {
   const title = useDonationStore((state) => state.title);
   const description = useDonationStore((state) => state.description);
 
-  const { id } = useParams();  
+  const { id } = useParams();
 
   const [receipt, setReceipt] = useState<ReceiptData | null>(null);
 
@@ -45,7 +47,8 @@ const Page = () => {
             reg12A: "AAAA1234AE20214",
             reg80G: "AAAA1234AF20214",
             pan: "AAAAA1234A",
-            address: "1-98/10/A, MLA Colony, Banjara Hills,\nHyderabad, Telangana - 500034",
+            address:
+              "1-98/10/A, MLA Colony, Banjara Hills,\nHyderabad, Telangana - 500034",
             phone: "+91 79891 16006",
             email: "info@pallepallekuaata.com",
             website: "https://www.pallepallekuaata.com",
@@ -61,14 +64,15 @@ const Page = () => {
             name: donor.fullName,
             email: donor.email,
             addressLine1: donor.addressLine1 || `${donor.city},`,
-            addressLine2: donor.addressLine2 || `${donor.state} - ${donor.pinCode}`,
+            addressLine2:
+              donor.addressLine2 || `${donor.state} - ${donor.pinCode}`,
             pan: donor.pan || "",
           },
 
           donation: {
             purpose: d.title,
             amount: d.amount,
-            platformFee: d.platformFee,
+            // platformFee: d.platformFee,
           },
 
           transaction: {
@@ -82,7 +86,9 @@ const Page = () => {
               minute: "2-digit",
               hour12: true,
             }),
-            status: d.paymentStatus.charAt(0).toUpperCase() + d.paymentStatus.slice(1),
+            status:
+              d.paymentStatus.charAt(0).toUpperCase() +
+              d.paymentStatus.slice(1),
           },
         };
 
@@ -98,7 +104,7 @@ const Page = () => {
       <main className="pt-20">
         <section className="relative">
           <HeroBanner />
-          <div className="section grid grid-cols-3 gap-4">
+          <div className="section grid grid-cols-3 gap-2 2xl:gap-4">
             {/* <div className="col-span-3 xl:col-span-2 space-y-4">
               {receipt ? (
                 <DonationSuccessful data={receipt} />
@@ -109,41 +115,39 @@ const Page = () => {
               )}
             </div> */}
             <div className="col-span-3 xl:col-span-2">
-  {receipt ? (
-    <DonationSuccessful data={receipt} />
-  ) : (
-    <div className="animate-pulse space-y-6">
-      {/* Success Header */}
-      <div className="flex flex-col items-center rounded-2xl bg-white py-6">
-        <div className="h-24 w-24 rounded-full bg-gray-200" />
-        <div className="mt-6 h-10 w-72 rounded bg-gray-200" />
-        <div className="mt-4 h-5 w-[420px] max-w-full rounded bg-gray-200" />
-      </div>
+              {receipt ? (
+                <DonationSuccessful data={receipt} />
+              ) : (
+                <div className="animate-pulse space-y-6">
+                  <div className="flex flex-col items-center rounded-2xl bg-white py-6">
+                    <div className="h-24 w-24 rounded-full bg-gray-200" />
+                    <div className="mt-6 h-10 w-72 rounded bg-gray-200" />
+                    <div className="mt-4 h-5 w-[420px] max-w-full rounded bg-gray-200" />
+                  </div>
 
-      {/* Transaction Details */}
-      <div className="rounded-2xl border border-[#E5E7EB] bg-[#F9FAFB] p-5">
-        <div className="h-7 w-56 rounded bg-gray-200" />
+                  <div className="rounded-2xl border border-[#E5E7EB] bg-[#F9FAFB] p-5">
+                    <div className="h-7 w-56 rounded bg-gray-200" />
 
-        {[1, 2, 3, 4].map((item) => (
-          <div
-            key={item}
-            className="flex items-center justify-between border-b border-[#E5E7EB] py-4 last:border-0"
-          >
-            <div className="h-4 w-36 rounded bg-gray-200" />
-            <div className="h-4 w-48 rounded bg-gray-200" />
-          </div>
-        ))}
+                    {[1, 2, 3, 4].map((item) => (
+                      <div
+                        key={item}
+                        className="flex items-center justify-between border-b border-[#E5E7EB] py-4 last:border-0"
+                      >
+                        <div className="h-4 w-36 rounded bg-gray-200" />
+                        <div className="h-4 w-48 rounded bg-gray-200" />
+                      </div>
+                    ))}
 
-        <div className="h-14 w-full rounded-xl bg-gray-200" />
+                    <div className="h-14 w-full rounded-xl bg-gray-200" />
 
-        <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-          <div className="h-14 rounded-xl border border-[#E5E7EB] bg-gray-200" />
-          <div className="h-14 rounded-xl border border-[#E5E7EB] bg-gray-200" />
-        </div>
-      </div>
-    </div>
-  )}
-</div>
+                    <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                      <div className="h-14 rounded-xl border border-[#E5E7EB] bg-gray-200" />
+                      <div className="h-14 rounded-xl border border-[#E5E7EB] bg-gray-200" />
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
 
             <div className="col-span-3 xl:col-span-1 space-y-4">
               <DonationSummary donation={donation} />

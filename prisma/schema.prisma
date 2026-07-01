@@ -48,7 +48,6 @@ model Donation {
   amount              Int
   title               String
   description         String
-  platformFee         Int
 
   razorpayOrderId     String          @unique
   razorpayPaymentId   String?

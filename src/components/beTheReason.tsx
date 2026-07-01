@@ -16,13 +16,13 @@ const BeTheReason = () => {
       >
       
 
-        <div className="relative z-10 flex flex-col items-start justify-between gap-8 px-6 py-8 md:flex-row md:items-center md:px-8 lg:px-10">
+        <div className="relative z-10 flex flex-col items-start justify-between gap-8 px-6 py-8 md:flex-row md:items-center md:px-8 2xl:px-10">
           <div className="text-white">
-            <p className="text-[18px] md:text-[22px] font-normal leading-tight">
+            <p className="text-[18px] 2xl:text-[22px] font-normal leading-tight">
               Be the reason a child believes in their dream.
             </p>
 
-            <h2 className="text-[26px] font-semibold md:text-[30px]">
+            <h2 className="text-[26px] font-semibold 2xl:text-[30px]">
               Together, Let's Build Champions.
             </h2>
           </div>
@@ -36,7 +36,7 @@ const BeTheReason = () => {
                 });
               }}
             //   onClick={() => router.push("/donate")}
-              className="cursor-pointer group inline-flex items-center gap-1 rounded-md bg-[#6F962C] px-6 py-3 text-sm font-semibold uppercase text-white transition hover:bg-[#5b8d30]"
+              className="cursor-pointer group inline-flex items-center gap-1 rounded-md bg-[#6F962C] px-4 py-2 2xl:px-6 2xl:py-3 text-[14px] 2xl:text-sm font-semibold uppercase text-white transition hover:bg-[#5b8d30]"
             >
               Donate Now
               <Heart className="h-4 w-4 fill-white text-white" />

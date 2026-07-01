@@ -31,7 +31,7 @@ export default function WhatHappensNext() {
   ];
   return (
     <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 w-full">
-      <h3 className="text-[20px] font-bold text-[#111827] mb-6">
+      <h3 className="text-[20px] font-bold text-[#111827] mb-3 2xl:mb-6">
         What Happens Next?
       </h3>
 
@@ -55,10 +55,10 @@ export default function WhatHappensNext() {
                 className={`pb-${isLast ? "0" : "6"} pt-1`}
                 style={{ paddingBottom: isLast ? 0 : "1.5rem" }}
               >
-                <p className="text-[15px] font-bold text-[#111827] leading-tight mb-1">
+                <p className="text-[14px] 2xl:text-[15px] font-bold text-[#111827] leading-tight">
                   {step.title}
                 </p>
-                <p className="text-[14px] text-[#6B7280] leading-snug">
+                <p className="text-[12px] 2xl:text-[14px] text-[#6B7280] leading-snug">
                   {step.description}
                 </p>
               </div>

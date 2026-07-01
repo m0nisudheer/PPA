@@ -8,21 +8,30 @@ export default function HeroBanner() {
     <section
       className="section relative h-[380px] lg:h-[480px] bg-cover bg-center bg-no-repeat"
         style={{
-  backgroundImage:
-    "url('https://res.cloudinary.com/dg8zhu8fq/image/upload/f_auto,q_auto:good,w_1920,c_limit/v1782554097/tgzlxja8ir4irmrebxgq.png')",
-}}
+          
+              backgroundImage: `
+      linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0.6) 25%,
+        rgba(0, 0, 0, 0.35) 45%,
+        rgba(0, 0, 0, 0) 60%
+      ),
+      url('https://res.cloudinary.com/dg8zhu8fq/image/upload/f_auto,q_auto:good,w_1920,c_limit/v1782915211/cuejd3fevq7aomjyyin0.jpg')
+    `,
+  }}
     >
       <div className="relative z-10 mx-auto flex h-full items-center">
         <div className="grid w-full lg:grid-cols-2 gap-8 md:gap-0">
           <div className="flex flex-col gap-8 justify-between text-white">
             <div className="flex flex-col gap-2 md:gap-3">
-              <h1 className="text-[22px] font-medium uppercase md:text-[36px] lg:text-[25px] xl:text-[42px]">
+                <h1 className="text-[22px] font-medium uppercase md:text-[36px] 2xl:text-[42px]">
                 Thank You! Your Donation Was Successful.  
               </h1>
 
               <div className="h-1 w-20 rounded-full bg-[#6BB643]" />
 
-              <p className="text-[20px] md:text-[24px] lg:text-[20px] xl:text-[26px]">
+                <p className="text-[20px] md:text-[24px] 2xl:text-[26px]">
                 You are now a part of a movement that changes lives.
               </p>
             </div>

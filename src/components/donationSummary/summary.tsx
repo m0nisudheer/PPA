@@ -29,8 +29,8 @@ export function DonationSummary({
   donation,
 }: DonationSummaryProps) {
   const donationAmount = Number(donation.amount);
-  const platformFee = 50;
-  const total = donationAmount + platformFee;
+  // const platformFee = 50;
+  const total = donationAmount;
 
   const Support = ({ active }: { active: boolean }) => (
     <svg
@@ -132,17 +132,17 @@ export function DonationSummary({
         </div>
 
         <div className="flex items-start gap-3 rounded-xl border border-[#E5E7EB] p-3">
-          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-[#F0FDF4]">
+          <div className="flex h-14 w-14 2xl:h-16 2xl:w-16 shrink-0 items-center justify-center rounded-full bg-[#F0FDF4]">
             <Support active={true} />
           </div>
           <div className="flex flex-col gap-1">
-            <p className="font-bold text-[#111827] leading-[100%] tracking-normal text-[24px]">
+            <p className="font-bold text-[#111827] leading-[100%] tracking-normal text-[22px] 2xl:text-[24px]">
                ₹{donationAmount.toLocaleString("en-IN")}
             </p>
-            <p className="font-bold text-[#111827] text-[15px]">
+            <p className="font-bold text-[#111827] text-[14px] 2xl:text-[15px]">
                {donation.title}
             </p>
-            <p className="text-[14px] text-[#6B7280] leading-[120%] tracking-normal">
+            <p className="text-[13px] 2xl:text-[14px] text-[#6B7280] leading-[120%] tracking-normal">
                {donation.description}
             </p>
           </div>
@@ -150,22 +150,22 @@ export function DonationSummary({
 
         <div className="space-y-2">
           <div className="flex justify-between">
-            <span className="text-[#4B5563] text-[16px]">Donation Amount</span>
-            <span className="text-[#111827] text-[16px] font-semibold">
+            <span className="text-[#4B5563] text-[15px] 2xl:text-[16px]">Donation Amount</span>
+            <span className="text-[#111827] text-[15px] 2xl:text-[16px] font-semibold">
               ₹{donationAmount.toLocaleString("en-IN")}
             </span>
           </div>
-          <div className="flex justify-between">
-            <span className="text-[#4B5563] text-[16px]">Platform Fee</span>
-            <span className="text-[#111827] text-[16px] font-semibold">
+          {/* <div className="flex justify-between">
+            <span className="text-[#4B5563] text-[15px] 2xl:text-[16px]">Platform Fee</span>
+            <span className="text-[#111827] text-[15px] 2xl:text-[16px] font-semibold">
               ₹{platformFee}
             </span>
-          </div>
+          </div> */}
           <div className="flex justify-between border-t border-gray-100 font-semibold text-gray-900">
-            <span className="text-[#111827] text-[18px] font-bold">
+            <span className="text-[#111827] text-[17px] 2xl:text-[18px] font-bold">
               Total Amount
             </span>
-            <span className="text-[#1A7A3C] text-[23px] font-bold">
+            <span className="text-[#1A7A3C] text-[20px] 2xl:text-[23px] font-bold">
               ₹{total.toLocaleString("en-IN")}
             </span>
           </div>
@@ -242,10 +242,10 @@ export function DonationHelp() {
                 </div>
 
                 <div>
-                  <p className="text-[15px] font-semibold text-[#1A7A3C]">
+                  <p className="text-[14px] 2xl:text-[15px] font-semibold text-[#1A7A3C]">
                     {item.amount}
                   </p>
-                  <p className="text-[13px] text-[#4B5563] leading-[130%] tracking-normal">{item.text}</p>
+                  <p className="text-[12px] 2xl:text-[13px] text-[#4B5563] leading-[130%] tracking-normal">{item.text}</p>
                 </div>
               </div>
             ))}
@@ -286,11 +286,11 @@ export function TrustStats() {
             </div>
 
             <div className="flex flex-col gap-4">
-              <p className="text-[22px] font-semibold leading-[100%] tracking-normal text-[#111827]">
+              <p className="text-[18px] 2xl:text-[22px] font-semibold leading-[100%] tracking-normal text-[#111827]">
                 Your Trust, Our Responsibility
               </p>
 
-              <p className="text-[15px] leading-[130%] md:leading-[100%] md:tracking-normal text-[#6B7280]">
+              <p className="text-[14px] 2xl:text-[15px] leading-[130%] md:leading-[100%] md:tracking-normal text-[#6B7280]">
                 We are committed to transparency and accountability. Your
                 donation is used efficiently to create a lasting impact in rural
                 communities.
@@ -298,7 +298,7 @@ export function TrustStats() {
 
               <a
                 href="#"
-                className="inline-flex items-center gap-1 text-[15px] font-semibold leading-[100%] tracking-normal text-[#1A7A3C] hover:underline"
+                className="inline-flex items-center gap-1 text-[14px] 2xl:text-[15px] font-semibold leading-[100%] tracking-normal text-[#1A7A3C] hover:underline"
               >
                 Learn more about our impact
                 <ArrowRight size={13} />
@@ -315,11 +315,11 @@ export function TrustStats() {
             >
               <div className="text-[#1A7A3C]">{s.icon}</div>
 
-              <p className="text-[22px] font-semibold leading-[100%] tracking-normal text-[#111827]">
+              <p className="text-[18px] 2xl:text-[22px] font-semibold leading-[100%] tracking-normal text-[#111827]">
                 {s.value}
               </p>
 
-              <p className="text-[14px] leading-[100%] tracking-normal text-[#6B7280]">
+              <p className="text-[14px] 2xl:text-[15px] leading-[100%] tracking-normal text-[#6B7280]">
                 {s.label}
               </p>
             </div>

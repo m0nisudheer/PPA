@@ -62,7 +62,7 @@ body {
 }
 
 .container {
-  @apply max-w-[2000px] mx-auto w-full;
+  @apply max-w-[1800px] mx-auto w-full;
 }
 
 .hide-scrollbar::-webkit-scrollbar {

@@ -271,32 +271,32 @@ export default function DonationCard() {
   };
 
   return (
-    <div className="rounded-2xl bg-white p-4 md:p-8 shadow-xl flex flex-col gap-6">
+    <div className="rounded-2xl bg-white p-4 xl:p-6 2xl:p-8 shadow-sm flex flex-col gap-4">
       <div className="flex flex-col gap-4 md:gap-2">
-        <p className="font-semibold text-[16px] md:text-[20px] uppercase leading-[100%] tracking-normal text-[#6F962C]">
+        <p className="font-semibold text-[16px] md:text-[18px] 2xl:text-[20px] uppercase leading-[100%] tracking-normal text-[#6F962C]">
           Choose Your Impact
         </p>
 
         <div>
-          <h2 className="text-[32px] md:text-[42px] font-bold text-[#111827] leading-[110%] tracking-normal">
+          <h2 className="text-[32px] md:text-[38px] 2xl:text-[42px] font-bold text-[#111827] leading-[110%] tracking-normal">
             Select Donation Amount
           </h2>
           <div className="h-1 w-20 rounded bg-[#6F962C]" />
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 text-[18px] text-[#161616]">
+        <div className="flex flex-wrap items-center gap-2 text-[16px] 2xl:text-[18px] text-[#161616]">
           <p className="font-normal">
             Every contribution, big or small, creates a lasting impact.
           </p>
 
-          <span className="rounded-sm border border-red-200 bg-red-50 px-2 text-[16px] text-red-700">
+          <span className="rounded-sm border border-red-200 bg-red-50 px-2 text-[14px] 2xl:text-[16px]  text-red-700">
             80G tax exemption is under process. Tax exemption receipts are
             currently not available.
           </span>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 ">
+      <div className="grid grid-cols-1 gap-2 2xl:gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         {donations.map((item, index) => {
           const Icon = item.icon;
           const active = selected === index;
@@ -321,11 +321,14 @@ export default function DonationCard() {
                 )}
 
                 <div className="flex h-full flex-col items-center justify-center gap-4 text-center">
-                  <h4 className="font-bold text-slate-900">{item.title}</h4>
+                  <h4 className="font-bold text-[16px] 2xl:text-[18px] text-[#111827]">
+                    {item.title}
+                  </h4>
+                  <div className="flex h-12 w-12 2xl:h-14 2xl:w-14 items-center justify-center rounded-lg p-2">
+                    <Icon active={active} />
+                  </div>
 
-                  <Icon active={active} />
-
-                  <p className="text-[15px] text-[#4B5563] font-inter">
+                  <p className="text-[12px] 2xl:text-[15px] text-[#4B5563] font-inter">
                     {item.desc}
                   </p>
                 </div>
@@ -337,7 +340,7 @@ export default function DonationCard() {
             <button
               key={index}
               onClick={() => handleSelectDonation(index)}
-              className={`relative flex flex-col gap-3 rounded-xl border p-6 text-center cursor-pointer ${
+              className={`relative flex flex-col gap-3 rounded-xl border p-4 2xl:p-5 text-center cursor-pointer ${
                 active
                   ? "border-2 border-[#70AA44] bg-lime-50"
                   : "border-gray-200 hover:border-[#70AA44] border-2"
@@ -350,7 +353,7 @@ export default function DonationCard() {
               )}
 
               {item.amount && (
-                <h3 className="text-[30px] font-bold leading-[100%] text-[#6F962C]">
+                <h3 className="text-[26px] 2xl:text-[30px] font-bold leading-[100%] text-[#6F962C]">
                   {item.amount}
                 </h3>
               )}
@@ -359,12 +362,14 @@ export default function DonationCard() {
                 {item.title}
               </h4>
 
-              <p className="text-[15px] text-[#4B5563] font-inter">
+              <p className="text-[12px] 2xl:text-[15px] text-[#4B5563] font-inter">
                 {item.desc}
               </p>
 
               <div className="mt-auto flex justify-end">
-                <Icon active={active} />
+                <div className="flex h-12 w-12 2xl:h-14 2xl:w-14 items-center justify-center rounded-lg p-2">
+                  <Icon active={active} />
+                </div>
               </div>
             </button>
           );
@@ -372,9 +377,9 @@ export default function DonationCard() {
       </div>
 
       {/* <div className="my-8 border-t border-gray-200" /> */}
-      <div className="my-2 md:my-4 grid grid-cols-1 gap-6 border-t border-gray-200 pt-8 lg:grid-cols-4 xl:grid-cols-6">
+      <div className="my-2 grid grid-cols-1 gap-6 border-t border-gray-200 pt-3 lg:grid-cols-4 xl:grid-cols-6">
         <div className="lg:col-span-2 flex flex-col gap-1">
-          <label className="block text-[16px] font-bold font-inter leading-6 tracking-normal">
+          <label className="block text-[14px] 2xl:text-[16px] font-bold font-inter leading-6 tracking-normal">
             Enter Custom Amount
           </label>
 
@@ -387,7 +392,7 @@ export default function DonationCard() {
                 setCustomAmount(e.target.value);
                 if (error) setError("");
               }}
-              className={`h-12 w-full rounded-lg border px-8 text-[15px] outline-none ${
+              className={`h-10 2xl:h-12 w-full rounded-lg border px-4 text-[14px] 2xl:px-6 2xl:text-[17px] outline-none ${
                 error ? "border-red-500" : "focus:border-[#6F962C]"
               }`}
             />
@@ -399,23 +404,39 @@ export default function DonationCard() {
         <div className="flex items-end lg:col-span-2">
           <button
             onClick={handleDonate}
-            className="cursor-pointer flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-[#6F962C] px-8 font-semibold text-white hover:bg-[#011C3E]"
+            className="cursor-pointer flex h-10 2xl:h-12 w-full items-center justify-center gap-2 rounded-lg bg-[#6F962C] px-8 font-semibold text-white hover:bg-[#011C3E]"
           >
-            <span>DONATE NOW</span>
+            <span className="text-[14px] 2xl:text-[17px]">DONATE NOW</span>
             <Heart className="h-4 w-4 fill-white" />
           </button>
         </div>
 
         <div className="flex flex-wrap items-end md:justify-end gap-3 lg:col-span-4 xl:col-span-2">
-          <img src="/images/payments/Upi.png" alt="UPI" className="h-8" />
-          <img src="/images/payments/Visa.png" alt="Visa" className="h-8" />
+          <img
+            src="/images/payments/Upi.png"
+            alt="UPI"
+            className="h-6 2xl:h-8"
+          />
+          <img
+            src="/images/payments/Visa.png"
+            alt="Visa"
+            className="h-6 2xl:h-8"
+          />
           <img
             src="/images/payments/Mastercard.png"
             alt="MasterCard"
-            className="h-8"
+            className="h-6 2xl:h-8"
           />
-          <img src="/images/payments/Rupay.png" alt="RuPay" className="h-8" />
-          <img src="/images/payments/Paytm.png" alt="Paytm" className="h-8" />
+          <img
+            src="/images/payments/Rupay.png"
+            alt="RuPay"
+            className="h-6 2xl:h-8"
+          />
+          <img
+            src="/images/payments/Paytm.png"
+            alt="Paytm"
+            className="h-6 2xl:h-8"
+          />
         </div>
       </div>
     </div>

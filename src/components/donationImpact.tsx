@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function ImpactCard({ item }: any) {
   return (
-    <div className="flex flex-col gap-5 md:gap-9">
+    <div className="flex flex-col gap-4 xl:gap-7 2xl:gap-9">
       <div className="flex items-start gap-3">
         <Image
           src={item.icon}
@@ -13,10 +13,10 @@ export default function ImpactCard({ item }: any) {
         />
 
         <div className="flex flex-col gap-3">
-          <h3 className="text-[17px] font-bold leading-[42%] tracking-normal">
+          <h3 className="text-[16px] 2xl:text-[17px] font-bold leading-[42%] tracking-normal">
             {item.title}
           </h3>
-          <p className="text-[13px] leading-[100%] tracking-normal text-[#6B7280]">
+          <p className="text-[13px] leading-[130%] tracking-normal text-[#6B7280]">
             {item.description}
           </p>
         </div>

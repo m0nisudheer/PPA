@@ -66,7 +66,7 @@ const Page = () => {
       const payload = {
         ...data,
         amount: Number(amount),
-        platformFee: 50,
+        // platformFee: 50,
         title,
         description,
       };
@@ -174,7 +174,7 @@ const Page = () => {
         <section className="relative">
           <HeroBanner />
 
-          <div className="section grid grid-cols-3 gap-4">
+          <div className="section grid grid-cols-3 gap-2 2xl:gap-4">
             <div className="col-span-3 xl:col-span-2">
               <YourDetailsForm onSubmitData={handleFormSubmit} loading={loadingPayment}/>
             </div>

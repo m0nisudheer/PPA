@@ -89,7 +89,7 @@ export default function Navbar() {
               //   });
               // }}
               onClick={() => router.push("/donate")}
-              className="inline-flex items-center gap-2 rounded bg-[#6F962C] px-6 py-2 text-[14px] 2xl:text-sm font-normal text-white transition hover:bg-[#011C3E] cursor-pointer"
+              className="inline-flex items-center gap-2 rounded bg-[#6F962C] px-4 py-1.5 2xl:px-6 2xl:py-2 text-[14px] 2xl:text-sm font-normal text-white transition hover:bg-[#011C3E] cursor-pointer"
             >
               <span>DONATE NOW</span>
               <Heart className="h-4 w-4 fill-white text-white" />
