@@ -43,7 +43,7 @@ export default function DonationBanner() {
 
           <div className="relative flex justify-center lg:col-span-2">
             <Image
-              src="/images/taxplayer.png"
+              src="/images/taxPlayer.png"
               alt="Player"
               width={180}
               height={250}
